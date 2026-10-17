@@ -1,0 +1,340 @@
+{
+  "grade": "pre2",
+  "gradeLabel": "英検準2級",
+  "version": "2026-10-11",
+  "interviewerLines": {
+    "start": "Let's start the test. Here's your card.",
+    "silentReading":"First, please read the passage silently for 20 seconds.",
+    "readAloud": "Now, please read it aloud.",
+    "q1": "Now, I'll ask you five questions. Please look at the passage.",
+    "q2": "Now, please look at the people in Picture A. They are doing different things. Tell me as much as you can about what they are doing.",
+    "q3": "Now, look at the {subject} in Picture B. Please describe the situation.",
+    "turnOver": "Now, please turn the card over.",
+    "yesFollowUp": "Please tell me more.",
+    "noFollowUp": "Why not?",
+    "end": "This is the end of the test. Could I have the card back, please?"
+  },
+  "checkPoints": {
+    "reading": [
+      "タイトルから読み始めているか",
+      "意味のまとまりで区切れているか",
+      "語の読み飛ばし・読み足しがないか"
+    ],
+    "passage": [
+      "By -ing または Because で始める形になっているか",
+      "本文の該当箇所を使えているか",
+      "主語や代名詞を質問に合わせて変えているか"
+    ],
+    "pictureA": [
+      "5つの動作をすべて述べているか",
+      "現在進行形（is / are + -ing）を使えているか",
+      "a man / a woman / a girl / a boy で人物を区別しているか"
+    ],
+    "pictureB": [
+      "できない理由にあたる事実を述べているか",
+      "so / but / because で理由と結果をつないでいるか",
+      "can't または want to を使って状況を示しているか"
+    ],
+    "opinion": [
+      "I agree / I disagree など立場を最初に示しているか",
+      "理由を2文程度で述べているか",
+      "具体例や体験を1つ添えているか"
+    ],
+    "personal": [
+      "Yes / No ではっきり答えているか",
+      "追加質問に2文程度で答えているか",
+      "理由や具体例を添えているか"
+    ]
+  },
+  "sets": [
+    {
+      "setId": "pre2-01",
+      "title": "Online Cooking Classes",
+      "passage": "These days, many people want to learn how to cook at home. Some cooking schools offer classes on the Internet, and students can join these classes from their own kitchens. In this way, people can learn new recipes without going out. Such classes are becoming more popular.",
+      "pictureA": "images/pre2/pre2-01-a.jpg",
+      "pictureB": "images/pre2/pre2-01-b.jpg",
+      "reading": { "prepSeconds": 20, "answerSeconds": 60 },
+      "questions": [
+        {
+          "no": 1,
+          "type": "passage",
+          "prompt": "According to the passage, how can people learn new recipes without going out?",
+          "prepSeconds": 0,
+          "answerSeconds": 30,
+          "modelAnswer": ["By joining cooking classes on the Internet from their own kitchens."]
+        },
+        {
+          "no": 2,
+          "type": "pictureA",
+          "prompt": null,
+          "prepSeconds": 20,
+          "answerSeconds": 60,
+          "modelAnswer": [
+            "A woman is washing vegetables.",
+            "A man is cutting a carrot.",
+            "A girl is taking cookies out of the oven.",
+            "A boy is wiping the table.",
+            "A woman is pouring water into a pot."
+          ],
+          "extraCheckPoints": ["カウンターを the table と呼んでも the counter と呼んでも正解とする"]
+        },
+        {
+          "no": 3,
+          "type": "pictureB",
+          "subject": "woman",
+          "prompt": null,
+          "prepSeconds": 20,
+          "answerSeconds": 30,
+          "modelAnswer": ["She is holding a big pot with both hands, so she can't open the door."]
+        },
+        {
+          "no": 4,
+          "type": "opinion",
+          "prompt": "Some people say that cooking at home is better than eating at restaurants. What do you think about that?",
+          "prepSeconds": 0,
+          "answerSeconds": 40,
+          "modelAnswer": ["I agree. Cooking at home is cheaper than eating out. Also, I can choose healthy food by myself."]
+        },
+        {
+          "no": 5,
+          "type": "personal",
+          "prompt": "Today, many people watch videos on the Internet to learn new things. Do you often watch videos to learn something?",
+          "prepSeconds": 0,
+          "answerSeconds": 40,
+          "modelAnswer": ["Yes. I often watch English videos after dinner. They help me understand natural pronunciation."]
+        }
+      ]
+    },
+    {
+      "setId": "pre2-02",
+      "title": "Sharing Umbrellas",
+      "passage": "Sudden rain can be a problem for people who do not have umbrellas. Now, some train stations have umbrella-sharing services. People can borrow an umbrella at one station and return it at another one. By doing so, they can avoid buying new umbrellas. Such services are useful on rainy days.",
+      "pictureA": "images/pre2/pre2-02-a.jpg",
+      "pictureB": "images/pre2/pre2-02-b.jpg",
+      "reading": { "prepSeconds": 20, "answerSeconds": 60 },
+      "questions": [
+        {
+          "no": 1,
+          "type": "passage",
+          "prompt": "According to the passage, how can people avoid buying new umbrellas?",
+          "prepSeconds": 0,
+          "answerSeconds": 30,
+          "modelAnswer": ["By borrowing an umbrella at one station and returning it at another one."]
+        },
+        {
+          "no": 2,
+          "type": "pictureA",
+          "prompt": null,
+          "prepSeconds": 20,
+          "answerSeconds": 60,
+          "modelAnswer": [
+            "A woman is buying a ticket.",
+            "A man is carrying a suitcase.",
+            "A girl is reading a book on a bench.",
+            "A boy is throwing a can into a trash can.",
+            "A woman is closing her umbrella."
+          ],
+          "extraCheckPoints": ["carrying / pulling a suitcase はどちらも正解とする"]
+        },
+        {
+          "no": 3,
+          "type": "pictureB",
+          "subject": "man",
+          "prompt": null,
+          "prepSeconds": 20,
+          "answerSeconds": 30,
+          "modelAnswer": ["His umbrella is broken, so he can't go out in the rain."]
+        },
+        {
+          "no": 4,
+          "type": "opinion",
+          "prompt": "Some people say that people should use trains and buses more often. What do you think about that?",
+          "prepSeconds": 0,
+          "answerSeconds": 40,
+          "modelAnswer": ["I agree. Trains and buses are better for the environment than cars. Also, we can read or study while we travel."]
+        },
+        {
+          "no": 5,
+          "type": "personal",
+          "prompt": "Today, many people check the weather on their smartphones. Do you check the weather every morning?",
+          "prepSeconds": 0,
+          "answerSeconds": 40,
+          "modelAnswer": ["Yes. I check it before I leave home. I want to know if I need an umbrella."]
+        }
+      ]
+    },
+    {
+      "setId": "pre2-03",
+      "title": "Visiting Farms",
+      "passage": "In Japan, some farmers welcome visitors to their farms. Visitors can pick fresh vegetables and learn how food is grown. In this way, children can understand the importance of farming. These programs are popular with families, and the number of such farms is increasing every year.",
+      "pictureA": "images/pre2/pre2-03-a.jpg",
+      "pictureB": "images/pre2/pre2-03-b.jpg",
+      "reading": { "prepSeconds": 20, "answerSeconds": 60 },
+      "questions": [
+        {
+          "no": 1,
+          "type": "passage",
+          "prompt": "According to the passage, how can children understand the importance of farming?",
+          "prepSeconds": 0,
+          "answerSeconds": 30,
+          "modelAnswer": ["By picking fresh vegetables and learning how food is grown."]
+        },
+        {
+          "no": 2,
+          "type": "pictureA",
+          "prompt": null,
+          "prepSeconds": 20,
+          "answerSeconds": 60,
+          "modelAnswer": [
+            "A man is carrying a box of tomatoes.",
+            "A woman is watering the plants.",
+            "A girl is picking strawberries.",
+            "A boy is feeding the chickens.",
+            "A woman is digging the ground with a shovel."
+          ]
+        },
+        {
+          "no": 3,
+          "type": "pictureB",
+          "subject": "woman",
+          "prompt": null,
+          "prepSeconds": 20,
+          "answerSeconds": 30,
+          "modelAnswer": ["She wants to take a picture of the flowers, but she can't because taking pictures is not allowed."]
+        },
+        {
+          "no": 4,
+          "type": "opinion",
+          "prompt": "Some people say that schools should give students more chances to learn outside the classroom. What do you think about that?",
+          "prepSeconds": 0,
+          "answerSeconds": 40,
+          "modelAnswer": ["I agree. Students can learn things they cannot learn from textbooks. For example, visiting a farm teaches us where our food comes from."]
+        },
+        {
+          "no": 5,
+          "type": "personal",
+          "prompt": "Today, many people enjoy outdoor activities. Do you often spend time outdoors on weekends?",
+          "prepSeconds": 0,
+          "answerSeconds": 40,
+          "modelAnswer": ["No. I usually stay home and study. I get tired after a long week at school."]
+        }
+      ]
+    },
+    {
+      "setId": "pre2-04",
+      "title": "Libraries Today",
+      "passage": "Many libraries in Japan are changing. Some of them hold events such as reading parties and small concerts for local people. In this way, libraries are becoming places where people can meet each other. Many libraries also have cafés, and they are popular with young people.",
+      "pictureA": "images/pre2/pre2-04-a.jpg",
+      "pictureB": "images/pre2/pre2-04-b.jpg",
+      "reading": { "prepSeconds": 20, "answerSeconds": 60 },
+      "questions": [
+        {
+          "no": 1,
+          "type": "passage",
+          "prompt": "According to the passage, how are libraries becoming places where people can meet each other?",
+          "prepSeconds": 0,
+          "answerSeconds": 30,
+          "modelAnswer": ["By holding events such as reading parties and small concerts for local people."]
+        },
+        {
+          "no": 2,
+          "type": "pictureA",
+          "prompt": null,
+          "prepSeconds": 20,
+          "answerSeconds": 60,
+          "modelAnswer": [
+            "A woman is reading a newspaper.",
+            "A man is carrying a lot of books.",
+            "A girl is studying at a desk.",
+            "A boy is using a computer.",
+            "A woman is drinking coffee."
+          ],
+          "extraCheckPoints": ["studying / writing / doing her homework はいずれも正解とする"]
+        },
+        {
+          "no": 3,
+          "type": "pictureB",
+          "subject": "woman",
+          "prompt": null,
+          "prepSeconds": 20,
+          "answerSeconds": 30,
+          "modelAnswer": ["The book is on a high shelf, so she can't reach it."]
+        },
+        {
+          "no": 4,
+          "type": "opinion",
+          "prompt": "Some people say that reading paper books is better than reading on a smartphone. What do you think about that?",
+          "prepSeconds": 0,
+          "answerSeconds": 40,
+          "modelAnswer": ["I disagree. Smartphones let us carry many books at the same time. We can also read in a dark room."]
+        },
+        {
+          "no": 5,
+          "type": "personal",
+          "prompt": "Today, many students study in libraries or cafés. Do you often study outside your home?",
+          "prepSeconds": 0,
+          "answerSeconds": 40,
+          "modelAnswer": ["Yes. I study at the city library on Sundays. It is quiet, so I can concentrate."]
+        }
+      ]
+    },
+    {
+      "setId": "pre2-05",
+      "title": "Student Volunteer Guides",
+      "passage": "Japan is popular with tourists from abroad. Some high school students volunteer as guides and show visitors around their towns in English. In this way, they can improve their English and learn more about their own culture. Such programs are increasing in many cities.",
+      "pictureA": "images/pre2/pre2-05-a.jpg",
+      "pictureB": "images/pre2/pre2-05-b.jpg",
+      "reading": { "prepSeconds": 20, "answerSeconds": 60 },
+      "questions": [
+        {
+          "no": 1,
+          "type": "passage",
+          "prompt": "According to the passage, how can some high school students improve their English and learn more about their own culture?",
+          "prepSeconds": 0,
+          "answerSeconds": 30,
+          "modelAnswer": ["By volunteering as guides and showing visitors around their towns in English."]
+        },
+        {
+          "no": 2,
+          "type": "pictureA",
+          "prompt": null,
+          "prepSeconds": 20,
+          "answerSeconds": 60,
+          "modelAnswer": [
+            "A man is taking a picture of the shrine.",
+            "A woman is looking at a map.",
+            "A girl is eating ice cream.",
+            "A boy is riding a bicycle.",
+            "A woman is sweeping the street."
+          ],
+          "extraCheckPoints": ["shrine を temple と言っても正解とする", "sweeping / cleaning the street はどちらも正解とする"]
+        },
+        {
+          "no": 3,
+          "type": "pictureB",
+          "subject": "woman",
+          "prompt": null,
+          "prepSeconds": 20,
+          "answerSeconds": 30,
+          "modelAnswer": ["She wants to go into the museum, but the line is too long."]
+        },
+        {
+          "no": 4,
+          "type": "opinion",
+          "prompt": "Some people say that high school students should do more volunteer work. What do you think about that?",
+          "prepSeconds": 0,
+          "answerSeconds": 40,
+          "modelAnswer": ["I agree. Volunteer work helps students meet many kinds of people. It also teaches them how to work in a team."]
+        },
+        {
+          "no": 5,
+          "type": "personal",
+          "prompt": "Today, many people use English on the Internet. Do you often use English outside school?",
+          "prepSeconds": 0,
+          "answerSeconds": 40,
+          "modelAnswer": ["Yes. I read English comments on video sites. Sometimes I write short replies in English, too."]
+        }
+      ]
+    }
+  ]
+}

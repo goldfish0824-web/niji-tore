@@ -1,0 +1,22 @@
+# wrangler で配置するときの設定。ダッシュボードに貼り付ける場合は使わない（README.md 参照）。
+name = "eiken-2ji"
+main = "worker.js"
+compatibility_date = "2026-10-01"
+
+[vars]
+GEMINI_MODEL = "gemini-3.1-flash-lite"
+# パスワードは全員共通なので、学校全体での1日あたりの上限になる
+DAILY_LIMIT = "200"
+# GitHub Pages の公開URL（リポジトリのルート）。末尾の / まで書く
+DATA_BASE_URL = "https://goldfish0824-web.github.io/niji-tore/"
+# アプリを置くオリジン。カンマ区切りで複数可。localhost は手元での確認用
+ALLOWED_ORIGINS = "https://goldfish0824-web.github.io,http://localhost:8000"
+
+# 回数制限の記録先（KV 名前空間 eiken-2ji-usage）
+[[kv_namespaces]]
+binding = "USAGE"
+id = "8e8bbe79be114abbb75bef7e17a0a0cb"
+
+# 秘密の値は wrangler.toml に書かず、次のコマンドで登録する
+#   npx wrangler secret put GEMINI_API_KEY
+#   npx wrangler secret put PASSWORDS
