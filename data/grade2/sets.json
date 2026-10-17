@@ -1,0 +1,355 @@
+{
+  "grade": "grade2",
+  "gradeLabel": "英検2級",
+  "version": "2026-10-17",
+  "status": "draft: 画像の生成待ち。画像ができたら No.2 の解答例と speech.side を実物に合わせて直す",
+  "interviewerLines": {
+    "start": "Let's start the test. Here's your card.",
+    "silentReading": "First, please read the passage silently for 20 seconds.",
+    "readAloud": "Now, please read it aloud.",
+    "q1": "Now, I'll ask you four questions.",
+    "q2": "Now, please look at the picture and describe the situation. You have 20 seconds to prepare. Your story should begin with the sentence on the card.",
+    "begin": "Please begin.",
+    "turnOver": "Now, please turn over the card and put it down.",
+    "yesFollowUp": "Why?",
+    "noFollowUp": "Why not?",
+    "end": "This is the end of the test. Could I have the card back, please?"
+  },
+  "checkPoints": {
+    "reading": [
+      "タイトルから読み始めているか",
+      "意味のまとまりで区切れているか",
+      "語の読み飛ばし・読み足しがないか"
+    ],
+    "passage": [
+      "By -ing または Because で始める形になっているか",
+      "本文の該当箇所を使えているか",
+      "主語や代名詞を質問に合わせて変えているか"
+    ],
+    "story": [
+      "カードに書かれた文から話し始めているか",
+      "3つのコマをすべて説明しているか（1コマにつき2文程度）",
+      "2コマ目・3コマ目を、矢印の中の語句から始めているか",
+      "過去形・過去進行形で話しているか",
+      "1コマ目のせりふを said to ～, \"...\" の形で入れているか",
+      "思考の吹き出しの中身や、人物の気持ちを述べているか"
+    ],
+    "opinion": [
+      "I agree / I disagree など立場を最初に示しているか",
+      "理由を2文程度で述べているか",
+      "具体例や体験を1つ添えているか"
+    ],
+    "personal": [
+      "Yes / No ではっきり答えているか",
+      "Why? / Why not? に2文程度で理由を答えているか",
+      "理由や具体例を添えているか"
+    ]
+  },
+  "sets": [
+    {
+      "setId": "grade2-01",
+      "title": "Saving Leftover Food",
+      "passage": "Many restaurants and bakeries throw away food that is not sold by the end of the day. Now, some shops are using smartphone apps to sell such food at lower prices. Customers order the food through an app and pick it up before the shop closes. By doing so, they can save money and help reduce food waste. These apps are becoming popular in many cities.",
+      "story": {
+        "firstSentence": "One day, Mr. and Mrs. Mori were talking about an app for buying leftover food.",
+        "panels": [
+          { "image": "images/grade2/grade2-01-1.jpg", "speech": { "text": "Let's buy some bread from the bakery near the station.", "side": "left" } },
+          { "image": "images/grade2/grade2-01-2.jpg", "arrow": "That evening" },
+          { "image": "images/grade2/grade2-01-3.jpg", "arrow": "The next morning" }
+        ]
+      },
+      "reading": { "prepSeconds": 20, "answerSeconds": 60 },
+      "questions": [
+        {
+          "no": 1,
+          "type": "passage",
+          "prompt": "According to the passage, how can customers save money and help reduce food waste?",
+          "prepSeconds": 0,
+          "answerSeconds": 30,
+          "modelAnswer": ["By ordering food through an app and picking it up before the shop closes."]
+        },
+        {
+          "no": 2,
+          "type": "story",
+          "prompt": null,
+          "prepSeconds": 20,
+          "answerSeconds": 90,
+          "modelAnswer": [
+            "One day, Mr. and Mrs. Mori were talking about an app for buying leftover food.",
+            "Mrs. Mori said to her husband, \"Let's buy some bread from the bakery near the station.\"",
+            "That evening, Mr. Mori got a big bag of bread at the bakery.",
+            "He was looking forward to eating it with his family.",
+            "The next morning, there was still a lot of bread on the table.",
+            "Mrs. Mori was thinking of giving some of it to their neighbor."
+          ]
+        },
+        {
+          "no": 3,
+          "type": "opinion",
+          "prompt": "Some people say that people in Japan waste too much food. What do you think about that?",
+          "prepSeconds": 0,
+          "answerSeconds": 45,
+          "modelAnswer": [
+            "I agree. Many people buy more food than they need. Also, a lot of food is thrown away at convenience stores every day.",
+            "I disagree. Many people in Japan try hard not to waste food. For example, they use leftovers to make other dishes."
+          ]
+        },
+        {
+          "no": 4,
+          "type": "personal",
+          "prompt": "Today, many people have food delivered to their homes. Do you think more people will use food delivery services in the future?",
+          "prepSeconds": 0,
+          "answerSeconds": 40,
+          "modelAnswer": [
+            "Yes. (Why?) It is convenient for busy people. Also, more restaurants will start offering delivery services.",
+            "No. (Why not?) Delivery services are expensive. Many people enjoy cooking at home or eating at restaurants instead."
+          ]
+        }
+      ]
+    },
+    {
+      "setId": "grade2-02",
+      "title": "Working from Home",
+      "passage": "More and more companies now allow their workers to work from home. Workers do not have to ride crowded trains every day, so they can use their time more effectively. Some companies have also made their offices smaller. By doing so, they are able to save money on rent. However, some workers feel lonely because they cannot talk with their coworkers face to face.",
+      "story": {
+        "firstSentence": "One day, Mr. Ota was working from home.",
+        "panels": [
+          { "image": "images/grade2/grade2-02-1.jpg", "speech": { "text": "I'll take the children to the park so you can work quietly.", "side": "left" } },
+          { "image": "images/grade2/grade2-02-2.jpg", "arrow": "During an online meeting" },
+          { "image": "images/grade2/grade2-02-3.jpg", "arrow": "That evening" }
+        ]
+      },
+      "reading": { "prepSeconds": 20, "answerSeconds": 60 },
+      "questions": [
+        {
+          "no": 1,
+          "type": "passage",
+          "prompt": "According to the passage, how are some companies able to save money on rent?",
+          "prepSeconds": 0,
+          "answerSeconds": 30,
+          "modelAnswer": ["By making their offices smaller."]
+        },
+        {
+          "no": 2,
+          "type": "story",
+          "prompt": null,
+          "prepSeconds": 20,
+          "answerSeconds": 90,
+          "modelAnswer": [
+            "One day, Mr. Ota was working from home.",
+            "His wife said to him, \"I'll take the children to the park so you can work quietly.\"",
+            "During an online meeting, the family's dog jumped onto Mr. Ota's desk.",
+            "His coworkers laughed when they saw the dog on the screen.",
+            "That evening, Mr. Ota was moving his desk into a small room.",
+            "The dog looked sad."
+          ]
+        },
+        {
+          "no": 3,
+          "type": "opinion",
+          "prompt": "Some people say that students can learn as well in online classes as in classrooms. What do you think about that?",
+          "prepSeconds": 0,
+          "answerSeconds": 45,
+          "modelAnswer": [
+            "I agree. Students can watch online lessons again and again. Also, they can study at their own pace.",
+            "I disagree. In the classroom, students can easily ask their teachers questions. They can also learn a lot by talking with their classmates."
+          ]
+        },
+        {
+          "no": 4,
+          "type": "personal",
+          "prompt": "Today, many people use social media to keep in touch with their friends. Do you think people spend too much time on social media?",
+          "prepSeconds": 0,
+          "answerSeconds": 40,
+          "modelAnswer": [
+            "Yes. (Why?) Many people check social media even while they are eating or walking. They should spend more time talking with people face to face.",
+            "No. (Why not?) Most people use social media only in their free time. It is a useful way to get information and keep in touch with friends."
+          ]
+        }
+      ]
+    },
+    {
+      "setId": "grade2-03",
+      "title": "Preparing for Disasters",
+      "passage": "Japan often has natural disasters such as earthquakes and typhoons. For this reason, many local governments hold disaster drills for residents. People practice walking to shelters and learn how to use emergency goods. By doing so, they can act quickly when a real disaster happens. These drills also give neighbors a good chance to get to know each other.",
+      "story": {
+        "firstSentence": "One day, the Tanaka family was talking about a disaster drill in their town.",
+        "panels": [
+          { "image": "images/grade2/grade2-03-1.jpg", "speech": { "text": "Let's join the drill this Sunday.", "side": "left" } },
+          { "image": "images/grade2/grade2-03-2.jpg", "arrow": "On Sunday at the park" },
+          { "image": "images/grade2/grade2-03-3.jpg", "arrow": "That night" }
+        ]
+      },
+      "reading": { "prepSeconds": 20, "answerSeconds": 60 },
+      "questions": [
+        {
+          "no": 1,
+          "type": "passage",
+          "prompt": "According to the passage, how can people act quickly when a real disaster happens?",
+          "prepSeconds": 0,
+          "answerSeconds": 30,
+          "modelAnswer": ["By practicing walking to shelters and learning how to use emergency goods."]
+        },
+        {
+          "no": 2,
+          "type": "story",
+          "prompt": null,
+          "prepSeconds": 20,
+          "answerSeconds": 90,
+          "modelAnswer": [
+            "One day, the Tanaka family was talking about a disaster drill in their town.",
+            "Mr. Tanaka said to his family, \"Let's join the drill this Sunday.\"",
+            "On Sunday at the park, their son was learning how to use a fire extinguisher.",
+            "Mrs. Tanaka was thinking of preparing an emergency bag.",
+            "That night, Mrs. Tanaka was putting water and food into a bag.",
+            "Mr. Tanaka found that the flashlight did not work."
+          ]
+        },
+        {
+          "no": 3,
+          "type": "opinion",
+          "prompt": "Some people say that schools should spend more time teaching students what to do in a disaster. What do you think about that?",
+          "prepSeconds": 0,
+          "answerSeconds": 45,
+          "modelAnswer": [
+            "I agree. Students need to know how to protect themselves. If they practice many times, they will not panic in a real disaster.",
+            "I disagree. Schools already hold disaster drills several times a year. Students should spend more time on their regular studies."
+          ]
+        },
+        {
+          "no": 4,
+          "type": "personal",
+          "prompt": "Today, many people do volunteer work in their local communities. Do you think more young people should take part in such activities?",
+          "prepSeconds": 0,
+          "answerSeconds": 40,
+          "modelAnswer": [
+            "Yes. (Why?) Young people can learn a lot by working with people of different ages. Also, they can help elderly people in their community.",
+            "No. (Why not?) Young people are busy with school and club activities. They should do volunteer work only when they have free time."
+          ]
+        }
+      ]
+    },
+    {
+      "setId": "grade2-04",
+      "title": "Self-Checkout Machines",
+      "passage": "Many supermarkets do not have enough workers these days. For this reason, more stores have started using self-checkout machines. Customers scan their items and pay for them by themselves at these machines. Some stores have introduced many such machines. In this way, they can serve a lot of customers with fewer workers. However, some elderly people find the machines difficult to use.",
+      "story": {
+        "firstSentence": "One day, Yuki went to a supermarket with her grandmother.",
+        "panels": [
+          { "image": "images/grade2/grade2-04-1.jpg", "speech": { "text": "I'll show you how to use this machine.", "side": "left" } },
+          { "image": "images/grade2/grade2-04-2.jpg", "arrow": "A few minutes later" },
+          { "image": "images/grade2/grade2-04-3.jpg", "arrow": "The next week" }
+        ]
+      },
+      "reading": { "prepSeconds": 20, "answerSeconds": 60 },
+      "questions": [
+        {
+          "no": 1,
+          "type": "passage",
+          "prompt": "According to the passage, how can some stores serve a lot of customers with fewer workers?",
+          "prepSeconds": 0,
+          "answerSeconds": 30,
+          "modelAnswer": ["By introducing many self-checkout machines."]
+        },
+        {
+          "no": 2,
+          "type": "story",
+          "prompt": null,
+          "prepSeconds": 20,
+          "answerSeconds": 90,
+          "modelAnswer": [
+            "One day, Yuki went to a supermarket with her grandmother.",
+            "Yuki said to her grandmother, \"I'll show you how to use this machine.\"",
+            "A few minutes later, her grandmother was scanning the items by herself.",
+            "She thought she could go shopping alone next time.",
+            "The next week, Yuki's grandmother was at the supermarket by herself.",
+            "She had trouble with the machine, and a store clerk was coming to help her."
+          ]
+        },
+        {
+          "no": 3,
+          "type": "opinion",
+          "prompt": "Some people say that robots will do many of the jobs that people do now. What do you think about that?",
+          "prepSeconds": 0,
+          "answerSeconds": 45,
+          "modelAnswer": [
+            "I agree. Robots are already working in factories and restaurants. In the future, they will be able to do even more kinds of work.",
+            "I disagree. Many jobs need human skills, such as communicating with others. Robots cannot understand people's feelings."
+          ]
+        },
+        {
+          "no": 4,
+          "type": "personal",
+          "prompt": "Today, many elderly people use smartphones. Do you think it is easy for elderly people to learn how to use new technology?",
+          "prepSeconds": 0,
+          "answerSeconds": 40,
+          "modelAnswer": [
+            "Yes. (Why?) Many smartphones have simple modes for elderly people. Also, their families can teach them how to use new devices.",
+            "No. (Why not?) New technology changes very quickly. It takes a lot of time for elderly people to get used to it."
+          ]
+        }
+      ]
+    },
+    {
+      "setId": "grade2-05",
+      "title": "Reducing Plastic Waste",
+      "passage": "Plastic waste has become a serious problem around the world. For this reason, more cafés now give discounts to customers who bring their own cups. Some cities have also set up water stations where people can fill their bottles for free. In this way, they are trying to reduce the number of plastic bottles that people throw away. Many people are becoming interested in such efforts.",
+      "story": {
+        "firstSentence": "One day, Mr. and Mrs. Ueda were getting ready to go hiking.",
+        "panels": [
+          { "image": "images/grade2/grade2-05-1.jpg", "speech": { "text": "We can fill these bottles at the water station.", "side": "left" } },
+          { "image": "images/grade2/grade2-05-2.jpg", "arrow": "At the foot of the mountain" },
+          { "image": "images/grade2/grade2-05-3.jpg", "arrow": "At the top of the mountain" }
+        ]
+      },
+      "reading": { "prepSeconds": 20, "answerSeconds": 60 },
+      "questions": [
+        {
+          "no": 1,
+          "type": "passage",
+          "prompt": "According to the passage, how are some cities trying to reduce the number of plastic bottles that people throw away?",
+          "prepSeconds": 0,
+          "answerSeconds": 30,
+          "modelAnswer": ["By setting up water stations where people can fill their bottles for free."]
+        },
+        {
+          "no": 2,
+          "type": "story",
+          "prompt": null,
+          "prepSeconds": 20,
+          "answerSeconds": 90,
+          "modelAnswer": [
+            "One day, Mr. and Mrs. Ueda were getting ready to go hiking.",
+            "Mrs. Ueda said to her husband, \"We can fill these bottles at the water station.\"",
+            "At the foot of the mountain, Mr. Ueda was filling a bottle with water.",
+            "Mrs. Ueda was looking forward to seeing the view from the top.",
+            "At the top of the mountain, Mrs. Ueda was drinking water.",
+            "Mr. Ueda realized that he had left his bottle at the water station."
+          ]
+        },
+        {
+          "no": 3,
+          "type": "opinion",
+          "prompt": "Some people say that people should stop buying drinks in plastic bottles. What do you think about that?",
+          "prepSeconds": 0,
+          "answerSeconds": 45,
+          "modelAnswer": [
+            "I agree. Plastic bottles cause a lot of pollution in the ocean. People can carry their own bottles instead.",
+            "I disagree. Drinks in plastic bottles are convenient when people are busy. It is more important to recycle the bottles properly."
+          ]
+        },
+        {
+          "no": 4,
+          "type": "personal",
+          "prompt": "Today, many people enjoy outdoor activities such as hiking and camping. Do you think more people will enjoy outdoor activities in the future?",
+          "prepSeconds": 0,
+          "answerSeconds": 40,
+          "modelAnswer": [
+            "Yes. (Why?) Many people want to relax in nature after working hard. Also, outdoor goods are becoming cheaper and easier to use.",
+            "No. (Why not?) Many people are too busy to go to the mountains. Also, some people prefer to stay at home and play video games."
+          ]
+        }
+      ]
+    }
+  ]
+}

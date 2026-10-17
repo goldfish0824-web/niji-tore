@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""問題を選ぶ画面に出す小さな画像を、各セットのイラストAから作る。
+"""問題を選ぶ画面に出す小さな画像を、各セットのイラストA（2級は3コマの1コマ目）から作る。
 
 使い方:
     python scripts/make_thumbs.py pre2
@@ -27,9 +27,11 @@ def make_thumbs(grade: str) -> list[Path]:
     out_dir.mkdir(parents=True, exist_ok=True)
     written = []
     for s in data.get("sets", []):
-        src = ROOT / s["pictureA"]
-        if not src.exists():
+        # 準2級はイラストA、2級は3コマの1コマ目を使う
+        rel = s.get("pictureA") or ((s.get("story") or {}).get("panels") or [{}])[0].get("image")
+        if not rel or not (ROOT / rel).exists():
             continue
+        src = ROOT / rel
         with Image.open(src) as im:
             im = im.convert("RGB")
             im.thumbnail((WIDTH, WIDTH))

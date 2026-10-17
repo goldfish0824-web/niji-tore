@@ -8,13 +8,15 @@
     # 2. images/pre2/_incoming/mapping.json を書く（Claude Code に画像を見せて作らせてよい）
     #    {"Gemini_Generated_Image_xxxx.jpg": "01-a", ...}
     #    値は「セット番号-a|b」だけでよい。grade の接頭辞はスクリプトが付ける。
+    #    2級の3コマ漫画（1枚絵）は「セット番号」だけ（"01" など）。コマごとの画像に自動で切り分ける。
     #    値を "_archive" にすると、採用しなかった画像を _archive/ に退避する。
 
     # 3. 下見してから実行する
     python scripts/rename_images.py pre2 --dry-run
     python scripts/rename_images.py pre2
 
-実行後、data/<grade>/sets.json が参照している画像がすべて揃っているか検証する。
+実行後、2級の1枚絵をコマに切り分け（split_panels.py）、data/<grade>/sets.json が参照している
+画像がすべて揃っているか検証し、問題選択画面の小さな画像（make_thumbs.py）を作る。
 """
 
 from __future__ import annotations
@@ -66,6 +68,9 @@ def verify(grade: str, out_dir: Path) -> list[str]:
             rel = s.get(key)
             if rel and not (ROOT / rel).exists():
                 missing.append(f"{s['setId']} {key}: {rel}")
+        for i, panel in enumerate((s.get("story") or {}).get("panels", []), start=1):
+            if not (ROOT / panel["image"]).exists():
+                missing.append(f"{s['setId']} コマ{i}: {panel['image']}")
     return missing
 
 
@@ -139,6 +144,24 @@ def main() -> int:
             shutil.move(str(src), str(dst))
     print(f"\n{len(planned)} 枚を{verb}しました。")
 
+    try:
+        from split_panels import split_panels
+    except ImportError:
+        split_panels = None
+        print("Pillow がないため、3コマ漫画の切り分けはしていません（pip install pillow）。")
+    if split_panels:
+        for line in split_panels(args.grade):
+            print(line)
+
+    # 1回分ずつ画像を足していくこともあるので、そろっていないセットがあっても作れる分は作る
+    try:
+        from make_thumbs import make_thumbs
+    except ImportError:
+        print("Pillow がないため、問題選択画面の小さな画像は作りませんでした（pip install pillow）。")
+    else:
+        thumbs = make_thumbs(args.grade)
+        print(f"問題選択画面の小さな画像を {len(thumbs)} 枚作りました。")
+
     missing = verify(args.grade, out_dir)
     if missing:
         print("\n警告: sets.json が参照しているのに見つからない画像があります。")
@@ -146,14 +169,6 @@ def main() -> int:
             print(f"  {m}")
         return 1
     print("sets.json が参照する画像はすべて揃っています。")
-
-    try:
-        from make_thumbs import make_thumbs
-    except ImportError:
-        print("Pillow がないため、問題選択画面の小さな画像は作りませんでした（pip install pillow）。")
-        return 0
-    thumbs = make_thumbs(args.grade)
-    print(f"問題選択画面の小さな画像を {len(thumbs)} 枚作りました。")
     return 0
 
 
