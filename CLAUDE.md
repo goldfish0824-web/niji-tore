@@ -22,6 +22,8 @@ app/         フロントエンド。ビルドなしの ES モジュール（mai
 worker/      Cloudflare Worker。worker.js 1ファイル。配置手順は worker/README.md
 ```
 
+画面は端末のダークモードに関係なく、明るい表示に固定している（作者の希望。パソコンと同じ見た目にするため）。
+
 ルートの `index.html` は今は `app/` へ飛ばすだけ。2級・準2級・3級を選ぶトップページは将来ここに作る（アプリは `?grade=` で級を切り替えられる）。
 
 動作確認は `python -m http.server 8000` で `/app/` を開き、`?timescale=0.1` で待ち時間を縮めて行う。
