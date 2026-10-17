@@ -8,6 +8,7 @@ const TIME_SCALE = Number(params.get("timescale")) || 1;
 const ROOT = new URL("../", location.href);
 const PASSWORD_KEY = "eiken2ji.password";
 const SHOW_TEXT_KEY = "eiken2ji.showText";
+const DONE_KEY = "eiken2ji.done";
 const REPEAT = "__repeat";
 const CONTINUE = "__continue";
 const VOICE_RMS = 0.015; // これより大きい音を声として数える
@@ -53,13 +54,15 @@ async function init() {
     fatal("問題データを読み込めませんでした。ページを開き直してください。");
     return;
   }
-  const want = params.get("set");
-  state.set = state.data.sets.find((s) => s.setId === want) || state.data.sets[0];
-
   document.title = `ニジトレ - ${state.data.gradeLabel}`;
   for (const el of document.querySelectorAll("[data-grade-label]")) el.textContent = state.data.gradeLabel;
-  for (const el of document.querySelectorAll("[data-set-title]")) el.textContent = state.set.title;
-  fillCard();
+
+  // URL で指定がなければ、まだ練習していない最初の回を選んでおく
+  const want = params.get("set");
+  const done = doneSets();
+  const { sets } = state.data;
+  selectSet(sets.find((s) => s.setId === want) || sets.find((s) => !done.includes(s.setId)) || sets[0]);
+  $("#guide").open = done.length === 0;
 
   if (!WORKER_URL) {
     $("#offline-note").hidden = false;
@@ -130,9 +133,49 @@ async function onLogin(e) {
 
 function backToReady() {
   resetSession();
+  renderSetList();
   renderRemaining($("#ready-remaining"));
   $("#btn-logout").hidden = !WORKER_URL;
   show("ready");
+}
+
+// ---------------------------------------------------------------------------
+// 問題（回）の選択。練習済みの回はこの端末にだけ記録する
+
+function selectSet(set) {
+  state.set = set;
+  for (const el of document.querySelectorAll("[data-set-title]")) el.textContent = set.title;
+  fillCard();
+  renderSetList();
+}
+
+function renderSetList() {
+  const done = doneSets();
+  $("#set-list").replaceChildren(
+    ...state.data.sets.map((s, i) =>
+      h(
+        "button",
+        { type: "button", class: "set-item", role: "radio", "aria-checked": String(s === state.set), onclick: () => selectSet(s) },
+        h("span", { class: "set-no" }, `第${i + 1}回`),
+        h("span", { class: "set-name", lang: "en" }, s.title),
+        done.includes(s.setId) && h("span", { class: "set-done" }, "練習済み")
+      )
+    )
+  );
+}
+
+function doneSets() {
+  try {
+    const list = JSON.parse(storage.get(`${DONE_KEY}.${GRADE}`) || "[]");
+    return Array.isArray(list) ? list : [];
+  } catch {
+    return [];
+  }
+}
+
+function markDone(setId) {
+  const list = doneSets();
+  if (!list.includes(setId)) storage.set(`${DONE_KEY}.${GRADE}`, JSON.stringify([...list, setId]));
 }
 
 // ---------------------------------------------------------------------------
@@ -167,6 +210,7 @@ async function startInterview() {
   try {
     await runInterview(ctrl.signal);
     state.running = null;
+    markDone(state.set.setId);
     renderDone();
   } catch (err) {
     state.running = null;

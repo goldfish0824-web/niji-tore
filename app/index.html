@@ -34,9 +34,15 @@
 <section id="screen-ready" class="screen page" hidden>
   <p class="brand">ニジトレ<span>英検2次試験対策アプリ</span></p>
   <h1><span data-grade-label></span> 面接練習</h1>
-  <p class="set-name">問題：<span data-set-title lang="en"></span></p>
 
   <div class="panel">
+    <h2>問題を選ぶ</h2>
+    <div id="set-list" class="set-list" role="radiogroup" aria-label="問題"></div>
+  </div>
+
+  <!-- 初めての人には開いて見せ、一度練習した人には閉じておく -->
+  <details id="guide" class="panel guide">
+    <summary>流れと、はじめる前の注意</summary>
     <h2>流れ</h2>
     <ol class="flow">
       <li>パッセージを黙読（20秒）してから音読</li>
@@ -54,7 +60,7 @@
       <input id="opt-show-text" type="checkbox">
       面接官のセリフを文字でも表示する
     </label>
-  </div>
+  </details>
 
   <p id="ready-remaining" class="note"></p>
   <p id="offline-note" class="note" hidden>いまは AI の講評なしで練習するモードです。終わったら自分の録音と解答例を見比べましょう。</p>

@@ -202,7 +202,7 @@ Scene: inside a bright modern public library with bookshelves and reading tables
 
 - A woman is reading a newspaper.
 - A man is carrying a lot of books.
-- A girl is studying at a desk.
+- A girl is writing in a notebook.
 - A boy is using a computer.
 - A woman is drinking coffee.
 
@@ -242,7 +242,7 @@ Scene: a sightseeing street in a Japanese town with a red torii gate and a shrin
 
 **No.2 想定解答**
 
-- A man is taking a picture of the shrine.
+- A man is taking a picture with a camera.
 - A woman is looking at a map.
 - A girl is eating ice cream.
 - A boy is riding a bicycle.

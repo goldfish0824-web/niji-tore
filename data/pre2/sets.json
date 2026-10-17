@@ -134,7 +134,11 @@
             "A boy is throwing a can into a trash can.",
             "A woman is closing her umbrella."
           ],
-          "extraCheckPoints": ["carrying / pulling a suitcase はどちらも正解とする"]
+          "extraCheckPoints": [
+            "carrying / pulling a suitcase はどちらも正解とする",
+            "券売機の人物は a woman / a girl のどちらでもよい",
+            "傘の女性は closing / holding her umbrella のどちらでも正解とする"
+          ]
         },
         {
           "no": 3,
@@ -245,7 +249,7 @@
           "modelAnswer": [
             "A woman is reading a newspaper.",
             "A man is carrying a lot of books.",
-            "A girl is studying at a desk.",
+            "A girl is writing in a notebook.",
             "A boy is using a computer.",
             "A woman is drinking coffee."
           ],
@@ -301,13 +305,13 @@
           "prepSeconds": 0,
           "answerSeconds": 60,
           "modelAnswer": [
-            "A man is taking a picture of the shrine.",
+            "A man is taking a picture with a camera.",
             "A woman is looking at a map.",
             "A girl is eating ice cream.",
             "A boy is riding a bicycle.",
             "A woman is sweeping the street."
           ],
-          "extraCheckPoints": ["shrine を temple と言っても正解とする", "sweeping / cleaning the street はどちらも正解とする"]
+          "extraCheckPoints": ["男性が何を撮っているかは言わなくてよい", "sweeping / cleaning the street はどちらも正解とする"]
         },
         {
           "no": 3,
