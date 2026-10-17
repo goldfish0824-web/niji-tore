@@ -315,8 +315,26 @@ input[type="password"]:focus { outline: 2px solid var(--accent); border-color: t
 .level-track { flex: 1; height: 6px; background: var(--surface-2); border-radius: 3px; overflow: hidden; }
 #level-bar { height: 100%; width: 0; background: var(--good); transition: width 0.05s linear; }
 
-.phase-hint { font-size: 0.88rem; color: var(--muted); margin: 6px 0 0; }
+.phase-hint { font-size: 0.95rem; color: var(--text); margin: 6px 0 0; }
 .phase-hint:empty { display: none; }
+.idle .phase-hint { color: var(--accent); font-weight: 600; }
+.phase-warning {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--rec);
+  background: var(--fix-soft);
+  border-radius: 8px;
+  padding: 6px 10px;
+  margin: 8px 0 0;
+}
+.phase-warning:empty { display: none; }
+
+/* 録音が始まった瞬間に一度だけ光らせる */
+.dock.started { animation: rec-start 0.9s ease-out; }
+@keyframes rec-start {
+  0% { background: var(--rec); }
+  100% { background: var(--surface); }
+}
 .actions { display: flex; gap: 10px; margin-top: 10px; }
 .actions:empty { display: none; }
 .actions .btn { flex: 1; }
@@ -364,6 +382,17 @@ input[type="password"]:focus { outline: 2px solid var(--accent); border-color: t
 .fb-block.rewrite h3 { color: var(--accent); }
 .fb-block.rewrite p { font-family: var(--serif); font-size: 1.05rem; }
 .fb-note { color: var(--muted); font-size: 0.92rem; margin: 10px 0 0; }
+.fb-block.next { border-color: var(--accent); background: var(--accent-soft); border-radius: 0 8px 8px 0; padding-right: 10px; }
+.fb-block.next h3 { color: var(--accent); }
+
+.fb-overall { border-top: 4px solid var(--accent); }
+.overall-list { margin: 10px 0 0; display: grid; grid-template-columns: max-content 1fr; gap: 8px 14px; }
+.overall-list dt { font-weight: 700; color: var(--muted); font-size: 0.9rem; padding-top: 1px; }
+.overall-list dd { margin: 0; }
+@media (max-width: 420px) {
+  .overall-list { grid-template-columns: 1fr; gap: 2px; }
+  .overall-list dd { margin-bottom: 8px; }
+}
 
 .fb-model { margin-top: 12px; border-top: 1px dashed var(--line); padding-top: 8px; }
 .fb-model summary { cursor: pointer; color: var(--accent); font-weight: 600; min-height: 32px; }

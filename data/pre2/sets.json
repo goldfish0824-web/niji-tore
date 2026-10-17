@@ -67,7 +67,7 @@
           "no": 2,
           "type": "pictureA",
           "prompt": null,
-          "prepSeconds": 20,
+          "prepSeconds": 0,
           "answerSeconds": 60,
           "modelAnswer": [
             "A woman is washing vegetables.",
@@ -83,7 +83,7 @@
           "type": "pictureB",
           "subject": "woman",
           "prompt": null,
-          "prepSeconds": 20,
+          "prepSeconds": 0,
           "answerSeconds": 30,
           "modelAnswer": ["She is holding a big pot with both hands, so she can't open the door."]
         },
@@ -125,7 +125,7 @@
           "no": 2,
           "type": "pictureA",
           "prompt": null,
-          "prepSeconds": 20,
+          "prepSeconds": 0,
           "answerSeconds": 60,
           "modelAnswer": [
             "A woman is buying a ticket.",
@@ -141,7 +141,7 @@
           "type": "pictureB",
           "subject": "man",
           "prompt": null,
-          "prepSeconds": 20,
+          "prepSeconds": 0,
           "answerSeconds": 30,
           "modelAnswer": ["His umbrella is broken, so he can't go out in the rain."]
         },
@@ -183,7 +183,7 @@
           "no": 2,
           "type": "pictureA",
           "prompt": null,
-          "prepSeconds": 20,
+          "prepSeconds": 0,
           "answerSeconds": 60,
           "modelAnswer": [
             "A man is carrying a box of tomatoes.",
@@ -198,7 +198,7 @@
           "type": "pictureB",
           "subject": "woman",
           "prompt": null,
-          "prepSeconds": 20,
+          "prepSeconds": 0,
           "answerSeconds": 30,
           "modelAnswer": ["She wants to take a picture of the flowers, but she can't because taking pictures is not allowed."]
         },
@@ -240,7 +240,7 @@
           "no": 2,
           "type": "pictureA",
           "prompt": null,
-          "prepSeconds": 20,
+          "prepSeconds": 0,
           "answerSeconds": 60,
           "modelAnswer": [
             "A woman is reading a newspaper.",
@@ -256,7 +256,7 @@
           "type": "pictureB",
           "subject": "woman",
           "prompt": null,
-          "prepSeconds": 20,
+          "prepSeconds": 0,
           "answerSeconds": 30,
           "modelAnswer": ["The book is on a high shelf, so she can't reach it."]
         },
@@ -298,7 +298,7 @@
           "no": 2,
           "type": "pictureA",
           "prompt": null,
-          "prepSeconds": 20,
+          "prepSeconds": 0,
           "answerSeconds": 60,
           "modelAnswer": [
             "A man is taking a picture of the shrine.",
@@ -314,7 +314,7 @@
           "type": "pictureB",
           "subject": "woman",
           "prompt": null,
-          "prepSeconds": 20,
+          "prepSeconds": 0,
           "answerSeconds": 30,
           "modelAnswer": ["She wants to go into the museum, but the line is too long."]
         },

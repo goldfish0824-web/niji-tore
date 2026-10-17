@@ -9,6 +9,10 @@ const ROOT = new URL("../", location.href);
 const PASSWORD_KEY = "eiken2ji.password";
 const SHOW_TEXT_KEY = "eiken2ji.showText";
 const REPEAT = "__repeat";
+const CONTINUE = "__continue";
+const VOICE_RMS = 0.015; // これより大きい音を声として数える
+const SPEAK_WARNING_MS = 1500; // 録音していない区間でこれだけ声がしたら注意を出す
+const SHORT_ANSWER_MS = 1500; // 録音中の声がこれ未満で「答え終わった」を押したら確かめる
 const YES_NO = [
   { label: "Yes と答えた", value: "yes", kind: "primary" },
   { label: "No と答えた", value: "no", kind: "primary" },
@@ -16,6 +20,8 @@ const YES_NO = [
 
 const $ = (sel) => document.querySelector(sel);
 const recorder = new Recorder();
+// いまの区間でマイクに入った声の長さ（ミリ秒）。マイクは面接中ずっと開いているので録音前の声も分かる
+const voice = { ms: 0, counting: false };
 
 const state = {
   data: null,
@@ -184,7 +190,12 @@ async function runInterview(signal) {
   focusCard("passage");
   await say(L.start);
   await say(L.silentReading);
-  await phase(signal, { label: "黙読", seconds: set.reading.prepSeconds, hint: "パッセージを声に出さずに読みましょう。" });
+  await phase(signal, {
+    label: "黙読",
+    seconds: set.reading.prepSeconds,
+    hint: "パッセージを声に出さずに読みましょう。",
+    speakWarning: "黙読の時間です。声に出して読むのは、このあと指示されてからです。",
+  });
   await say(L.readAloud);
   state.clips.reading = (await recordAnswer(signal, {
     label: "音読",
@@ -203,18 +214,25 @@ async function runInterview(signal) {
       turned = true;
     }
     focusCard(q.type);
+    if (q.type === "personal") idleDock("次は Yes か No で答える質問です。まず Yes / No だけを言います。");
     await say(`${q.no === 1 ? `${L.q1} ` : ""}No. ${q.no}. ${question}`);
     if (q.prepSeconds) {
-      await phase(signal, { label: `No.${q.no} 考える時間`, seconds: q.prepSeconds, repeat: question, hint: "合図の音が鳴ったら話し始めます。" });
+      await phase(signal, {
+        label: `No.${q.no} 考える時間（まだ話さない）`,
+        seconds: q.prepSeconds,
+        repeat: question,
+        hint: "「ピッ」と鳴ったら録音が始まります。それまでは頭の中で考えましょう。",
+        speakWarning: "まだ録音していません。「ピッ」と鳴ってから話してください。",
+      });
     }
 
     if (q.type === "personal") {
       // Yes / No を言ったらボタンで選ぶ。選んだほうの追加質問が続く
       const first = await recordAnswer(signal, {
-        label: `No.${q.no}`,
+        label: `No.${q.no} まず Yes / No`,
         seconds: Math.min(20, q.answerSeconds),
         repeat: question,
-        hint: "Yes か No で答えてから、どちらで答えたかを押してください。",
+        hint: "Yes か No だけを言ってから、言ったほうのボタンを押してください。理由はこのあと聞かれます。",
         choices: YES_NO,
       });
       let choice = first.choice;
@@ -254,8 +272,10 @@ async function recordAnswer(signal, opts) {
 /**
  * 時間を数える区間（黙読・考える時間・解答）。押されたボタンの value か "timeout" を返す。
  * 「もう一度聞く」の間は時間と録音を止める。
+ * speakWarning: 録音していない区間で話し始めたときに出す注意。
+ * 録音中は、声がほとんど入っていないのに「答え終わった」を押したら一度確かめる。
  */
-function phase(signal, { label, seconds, hint = "", repeat = null, choices = null, recording = false, done = "答え終わった" }) {
+function phase(signal, { label, seconds, hint = "", repeat = null, choices = null, recording = false, done = "答え終わった", speakWarning = null }) {
   return new Promise((resolve, reject) => {
     if (signal.aborted) return reject(abortError());
     const total = seconds * 1000 * TIME_SCALE;
@@ -263,6 +283,8 @@ function phase(signal, { label, seconds, hint = "", repeat = null, choices = nul
     let last = performance.now();
     let paused = false;
     let finished = false;
+    let warned = false;
+    let confirming = false;
 
     const actions = [];
     if (repeat) actions.push({ label: "もう一度聞く", value: REPEAT, kind: "secondary" });
@@ -270,6 +292,8 @@ function phase(signal, { label, seconds, hint = "", repeat = null, choices = nul
     else if (recording) actions.push({ label: done, value: "done", kind: "primary" });
 
     setDock({ label, hint, recording, actions, onAction });
+    voice.ms = 0;
+    voice.counting = true;
     const timer = setInterval(tick, 100);
     signal.addEventListener("abort", onAbort);
     tick();
@@ -279,10 +303,15 @@ function phase(signal, { label, seconds, hint = "", repeat = null, choices = nul
       if (!paused) elapsed += now - last;
       last = now;
       renderTime(total - elapsed, total);
+      if (speakWarning && !warned && voice.ms >= SPEAK_WARNING_MS) {
+        warned = true;
+        setDockWarning(speakWarning);
+      }
       if (elapsed >= total) finish("timeout");
     }
     function cleanup() {
       finished = true;
+      voice.counting = false;
       clearInterval(timer);
       signal.removeEventListener("abort", onAbort);
       idleDock();
@@ -299,12 +328,29 @@ function phase(signal, { label, seconds, hint = "", repeat = null, choices = nul
     }
     async function onAction(value) {
       if (finished) return;
+      if (value === CONTINUE) {
+        confirming = false;
+        setDockWarning("");
+        renderActions(actions);
+        return;
+      }
+      if (value === "done" && recording && !confirming && voice.ms < SHORT_ANSWER_MS) {
+        // 勘違いで押してしまったときに、録音が空のまま次へ進まないようにする
+        confirming = true;
+        setDockWarning("まだほとんど声が録音されていません。答え終わりましたか？");
+        renderActions([
+          { label: "続けて話す", value: CONTINUE, kind: "secondary" },
+          { label: "終わる", value: "done", kind: "primary" },
+        ]);
+        return;
+      }
       if (value !== REPEAT) {
         finish(value);
         return;
       }
       if (paused) return;
       paused = true;
+      voice.counting = false; // 読み上げの音を声として数えない
       if (recording) recorder.pause();
       setActionsDisabled(true);
       try {
@@ -314,6 +360,7 @@ function phase(signal, { label, seconds, hint = "", repeat = null, choices = nul
       }
       if (finished) return;
       paused = false;
+      voice.counting = true;
       last = performance.now();
       if (recording) recorder.resume();
       setActionsDisabled(false);
@@ -480,22 +527,38 @@ function setDock({ label, hint, recording, actions, onAction }) {
   dock.classList.toggle("recording", recording);
   dock.classList.remove("idle");
   $("#phase-label").textContent = recording ? `録音中 ${label}` : label;
-  $("#phase-hint").textContent = hint;
+  $("#phase-hint").textContent = hint || (recording ? "どうぞ、話してください。" : "");
+  setDockWarning("");
   $("#level").hidden = !recording;
+  if (recording) {
+    // 録音が始まったことがはっきり分かるように、パネルを一度光らせる
+    dock.classList.remove("started");
+    void dock.offsetWidth;
+    dock.classList.add("started");
+  }
   dockAction = onAction;
+  renderActions(actions);
+}
+
+function renderActions(actions) {
   $("#phase-actions").replaceChildren(
     ...actions.map((a) => h("button", { type: "button", class: `btn ${a.kind}`, onclick: () => dockAction?.(a.value) }, a.label))
   );
 }
 
-function idleDock() {
+function setDockWarning(text) {
+  $("#phase-warning").textContent = text;
+}
+
+function idleDock(note = "") {
   const dock = $("#dock");
-  dock.classList.remove("recording");
+  dock.classList.remove("recording", "started");
   dock.classList.add("idle");
   dockAction = null;
   $("#phase-label").textContent = "面接官の話を聞きましょう";
   $("#phase-time").textContent = "";
-  $("#phase-hint").textContent = "";
+  $("#phase-hint").textContent = note;
+  setDockWarning("");
   $("#progress-bar").style.width = "0%";
   $("#level").hidden = true;
   $("#phase-actions").replaceChildren();
@@ -517,6 +580,8 @@ function renderTime(remainingMs, totalMs) {
 }
 
 function renderLevel(rms) {
+  // 音量は 1/20 秒ごとに届く
+  if (voice.counting && rms >= VOICE_RMS) voice.ms += 50;
   const db = 20 * Math.log10(rms + 1e-8);
   const pct = Math.max(0, Math.min(1, (db + 60) / 50));
   $("#level-bar").style.width = `${pct * 100}%`;
@@ -554,7 +619,7 @@ async function requestFeedback() {
     const res = await api("/api/feedback", form);
     state.limit = res.limit;
     state.remaining = res.remaining;
-    renderFeedback(res.items);
+    renderFeedback(res.items, res.overall);
   } catch (err) {
     if (typeof err.payload?.remaining === "number") state.remaining = err.payload.remaining;
     renderDone();
@@ -562,7 +627,7 @@ async function requestFeedback() {
   }
 }
 
-function renderFeedback(items) {
+function renderFeedback(items, overall = null) {
   const { set } = state;
   const byId = new Map((items || []).map((it) => [it.id, it]));
   const L = state.data.interviewerLines;
@@ -593,6 +658,8 @@ function renderFeedback(items) {
       })
     );
   }
+
+  if (overall) list.push(overallItem(overall));
 
   $("#feedback-list").replaceChildren(...list);
   $("#feedback-ai-note").hidden = !items;
@@ -628,6 +695,22 @@ function feedbackItem({ title, question, picture = null, clips, ai, extra }) {
     ),
     ai && aiBlocks(ai),
     extra
+  );
+}
+
+function overallItem(overall) {
+  const rows = [
+    ["発音", overall.pronunciation],
+    ["文法・語彙", overall.grammar],
+    ["流暢さ", overall.fluency],
+    ["答え方", overall.response],
+  ].filter(([, text]) => text);
+  return h(
+    "article",
+    { class: "fb-item fb-overall" },
+    h("header", { class: "fb-head" }, h("h2", {}, "全体の講評")),
+    h("dl", { class: "overall-list" }, rows.map(([label, text]) => [h("dt", {}, label), h("dd", {}, text)])),
+    overall.nextStep && h("div", { class: "fb-block next" }, h("h3", {}, "次の練習で意識すること"), h("p", {}, overall.nextStep))
   );
 }
 

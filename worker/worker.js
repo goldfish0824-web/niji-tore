@@ -123,7 +123,7 @@ async function handleFeedback(request, env) {
 
   const started = Date.now();
   const { text, usage, model } = await callGemini(env, buildRequest(data, set, clips, choices));
-  const items = normalizeItems(text, itemIds(set));
+  const { items, overall } = normalizeFeedback(text, itemIds(set));
 
   // 講評を返せたときだけ回数を数える。通信エラーで生徒の1回分を減らさないため。
   await writeUsage(env, userKey);
@@ -141,7 +141,7 @@ async function handleFeedback(request, env) {
     thoughtTokens: usage.thoughtsTokenCount,
   }));
 
-  return { items, limit, remaining: Math.max(0, limit - used - 1) };
+  return { items, overall, limit, remaining: Math.max(0, limit - used - 1) };
 }
 
 // ---------------------------------------------------------------------------
@@ -293,9 +293,25 @@ const RESPONSE_SCHEMA = {
         propertyOrdering: ["id", "transcript", "good", "fixes", "rewrite", "unclear", "note"],
       },
     },
+    overall: {
+      type: "OBJECT",
+      properties: {
+        pronunciation: { type: "STRING" },
+        grammar: { type: "STRING" },
+        fluency: { type: "STRING" },
+        response: { type: "STRING" },
+        nextStep: { type: "STRING" },
+      },
+      required: ["pronunciation", "grammar", "fluency", "response", "nextStep"],
+      propertyOrdering: ["pronunciation", "grammar", "fluency", "response", "nextStep"],
+    },
   },
-  required: ["items"],
+  required: ["items", "overall"],
+  // 問題ごとの講評を書いてから全体をまとめさせる
+  propertyOrdering: ["items", "overall"],
 };
+
+const OVERALL_KEYS = ["pronunciation", "grammar", "fluency", "response", "nextStep"];
 
 function systemPrompt(gradeLabel) {
   return `あなたは日本の高校の経験豊かな英語教師です。${gradeLabel}の二次試験（面接）に向けて練習している高校生の解答に、日本語でコメントと添削を返します。
@@ -316,8 +332,15 @@ function systemPrompt(gradeLabel) {
 - transcript と unclear を埋める。カードの本文と比べて、読み飛ばした語、読み足した語、タイトルを読んでいないことがあれば note に書く。
 - good はできていたことを短く1つ。fixes と rewrite は空にする。
 
+最後に overall に、すべての解答を通しての講評を書く。各欄1〜2文で、どの問題のどの言い方かが分かるように具体的に書く。
+- pronunciation: 発音（聞き取りやすさ）。聞き取りにくかった語に共通する傾向があればそれを。
+- grammar: 文法・語彙。何度も出たまちがいがあればそれを。
+- fluency: 流暢さ。長い沈黙、言い直し、話し始めるまでの間など。
+- response: 答え方。質問に合った形で答えられていたか、時間内に答えきれていたか。
+- nextStep: 次の練習でいちばん意識するとよいことを1つ。
+
 必ず守ること:
-- 合否、A/B/C、点数、「〜点中〜点」「合格できる」「合格レベル」のような評価や予想は絶対に書かない。
+- 合否、合格の可能性、A/B/C、点数、「〜点中〜点」「合格できる」「合格レベル」のような評価や予想は、overall も含めて絶対に書かない。
 - 解答例は正解ではなく参考。違う言い方でも、質問に答えられていて見るべき点を満たしていれば、肯定的に扱う。
 - 中学生〜高校生が読んで分かる日本語で書く。専門用語は避ける。
 - good・fixes・note の日本語は、1項目あわせて200字以内。
@@ -368,7 +391,7 @@ function buildRequest(data, set, clips, choices) {
   }
 
   const ids = itemIds(set);
-  text(`\n以上の${ids.length}項目（${ids.join(", ")}）について、講評を JSON で返してください。`);
+  text(`\n以上の${ids.length}項目（${ids.join(", ")}）の講評と、全体の講評（overall）を JSON で返してください。`);
 
   return {
     systemInstruction: { parts: [{ text: systemPrompt(data.gradeLabel) }] },
@@ -426,7 +449,7 @@ async function callGemini(env, body) {
   return { text, usage: result.usageMetadata || {}, model };
 }
 
-function normalizeItems(text, ids) {
+function normalizeFeedback(text, ids) {
   let parsed;
   try {
     parsed = JSON.parse(text);
@@ -443,7 +466,11 @@ function normalizeItems(text, ids) {
 
   const str = (v) => (typeof v === "string" ? v.trim() : "");
   const strs = (v, max) => (Array.isArray(v) ? v.map(str).filter(Boolean).slice(0, max) : []);
-  return ids.map((id) => {
+
+  const rawOverall = parsed && typeof parsed.overall === "object" ? parsed.overall : null;
+  const overall = rawOverall ? Object.fromEntries(OVERALL_KEYS.map((k) => [k, str(rawOverall[k])])) : null;
+
+  const items = ids.map((id) => {
     const it = byId.get(id) || {};
     return {
       id,
@@ -455,6 +482,7 @@ function normalizeItems(text, ids) {
       note: byId.has(id) ? str(it.note) : "この問題の講評を受け取れませんでした。",
     };
   });
+  return { items, overall };
 }
 
 // ---------------------------------------------------------------------------

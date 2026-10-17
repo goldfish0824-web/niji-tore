@@ -23,10 +23,12 @@
 | --- | --- | --- |
 | 音読 | 20秒黙読のあとタイトルから音読 | — |
 | No.1 | Please look at the passage. How can ...? | By -ing ... / Because ... |
-| No.2 | Now, please look at the people in Picture A. They are doing different things. Tell me as much as you can about what they are doing. | 20秒考える。現在進行形で5文 |
-| No.3 | Now, look at the man / woman in Picture B. Please describe the situation. | 20秒考える。「～, so ... can't ～」か「～, but ～」で理由ごと |
+| No.2 | Now, please look at the people in Picture A. They are doing different things. Tell me as much as you can about what they are doing. | すぐ答える。現在進行形で5文 |
+| No.3 | Now, look at the man / woman in Picture B. Please describe the situation. | すぐ答える。「～, so ... can't ～」か「～, but ～」で理由ごと |
 | No.4 | （カードを裏返す）Some people say that ... . What do you think about that? | I agree. / I disagree. ＋ 理由2文 |
 | No.5 | Today, ... . Do you ...? → Yes: Please tell me more. / No: Why not? | Yes / No ＋ 2文 |
+
+準2級の No.2・No.3 には考える時間がない。考える時間20秒があるのは2級の No.2（英検公式サイトの「準2級の試験内容」「2級の試験内容」で確認、2026-10-17）。
 
 ### 生成プロンプトの共通ヘッダー
 
