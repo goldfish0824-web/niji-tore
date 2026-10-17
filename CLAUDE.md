@@ -49,7 +49,7 @@ python scripts/rename_images.py pre2 --dry-run  # 下見
 python scripts/rename_images.py pre2            # 実行
 ```
 
-mapping.json は `{"元のファイル名": "01-a"}` の形。値を `_archive` にすると、採用しなかった画像を退避できる。実行後、sets.json が参照する画像が揃っているか自動で検証する。
+mapping.json は `{"元のファイル名": "01-a"}` の形。値を `_archive` にすると、採用しなかった画像を退避できる。実行後、sets.json が参照する画像が揃っているか自動で検証し、問題選択画面に出す小さな画像（`images/<grade>/thumbs/<setId>.jpg`、イラストAを縮小したもの）も作る。sets.json だけ直したときは `python scripts/make_thumbs.py pre2` で作り直す。
 
 ## 技術構成
 

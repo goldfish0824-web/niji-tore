@@ -33,6 +33,7 @@ python -m http.server 8000
 | `data/feedback-prompt.md` | AIに渡す講評プロンプトの下書き |
 | `images/pre2/` | 準2級のイラスト（`pre2-01-a.jpg` 形式） |
 | `scripts/rename_images.py` | `_incoming` の画像を正式名にリネームする |
+| `scripts/make_thumbs.py` | 問題選択画面に出す小さな画像をイラストAから作る |
 | `app/` | フロントエンド。ビルドなしの HTML / CSS / JS |
 | `worker/` | Cloudflare Worker（`worker.js` 1ファイル）と配置手順 |
 

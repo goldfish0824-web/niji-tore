@@ -146,6 +146,14 @@ def main() -> int:
             print(f"  {m}")
         return 1
     print("sets.json が参照する画像はすべて揃っています。")
+
+    try:
+        from make_thumbs import make_thumbs
+    except ImportError:
+        print("Pillow がないため、問題選択画面の小さな画像は作りませんでした（pip install pillow）。")
+        return 0
+    thumbs = make_thumbs(args.grade)
+    print(f"問題選択画面の小さな画像を {len(thumbs)} 枚作りました。")
     return 0
 
 

@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="color-scheme" content="light dark">
   <title>ニジトレ -英検2次試験対策アプリ-</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700;800&display=swap">
   <link rel="stylesheet" href="style.css">
   <script type="module" src="main.js"></script>
 </head>
@@ -20,8 +23,13 @@
 
 <!-- パスワード（照合は Worker が行う。ここは入力欄を出すだけ） -->
 <section id="screen-login" class="screen page" hidden>
-  <p class="brand">ニジトレ<span>英検2次試験対策アプリ</span></p>
-  <h1><span data-grade-label></span> 面接練習</h1>
+  <header class="hero">
+    <div class="rainbow" aria-hidden="true"></div>
+    <span class="hello" aria-hidden="true">Hello!</span>
+    <p class="brand">ニジトレ</p>
+    <p class="brand-sub">英検2次試験対策アプリ</p>
+  </header>
+  <p class="lead"><span class="grade-pill" data-grade-label></span>の面接を、<br>本番そっくりに練習しよう！</p>
   <form id="login-form" class="panel">
     <label for="password">パスワード</label>
     <input id="password" type="password" autocomplete="current-password" autocapitalize="off" spellcheck="false" required>
@@ -32,11 +40,15 @@
 </section>
 
 <section id="screen-ready" class="screen page" hidden>
-  <p class="brand">ニジトレ<span>英検2次試験対策アプリ</span></p>
-  <h1><span data-grade-label></span> 面接練習</h1>
+  <header class="hero hero-small">
+    <div class="rainbow" aria-hidden="true"></div>
+    <p class="brand">ニジトレ</p>
+    <p class="brand-sub">英検2次試験対策アプリ</p>
+  </header>
+  <p class="lead"><span class="grade-pill" data-grade-label></span> 面接練習</p>
 
   <div class="panel">
-    <h2>問題を選ぶ</h2>
+    <h2>どの回で練習する？</h2>
     <div id="set-list" class="set-list" role="radiogroup" aria-label="問題"></div>
   </div>
 

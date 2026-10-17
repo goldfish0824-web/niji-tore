@@ -149,16 +149,33 @@ function selectSet(set) {
   renderSetList();
 }
 
+// 回ごとのカードの色（虹の順）
+const SET_COLORS = ["#f0447a", "#f57c1f", "#23a565", "#2f80ed", "#7b5cf0"];
+
 function renderSetList() {
   const done = doneSets();
   $("#set-list").replaceChildren(
     ...state.data.sets.map((s, i) =>
       h(
         "button",
-        { type: "button", class: "set-item", role: "radio", "aria-checked": String(s === state.set), onclick: () => selectSet(s) },
-        h("span", { class: "set-no" }, `第${i + 1}回`),
-        h("span", { class: "set-name", lang: "en" }, s.title),
-        done.includes(s.setId) && h("span", { class: "set-done" }, "練習済み")
+        {
+          type: "button",
+          class: "set-item",
+          role: "radio",
+          "aria-checked": String(s === state.set),
+          style: `--c: ${SET_COLORS[i % SET_COLORS.length]}`,
+          onclick: () => selectSet(s),
+        },
+        // 小さな画像は scripts/make_thumbs.py が作る。なければ出さない
+        h("img", { class: "set-thumb", src: asset(`images/${GRADE}/thumbs/${s.setId}.jpg`), alt: "", onerror: (e) => e.target.remove() }),
+        h(
+          "span",
+          { class: "set-text" },
+          h("span", { class: "set-no" }, `第${i + 1}回`),
+          h("span", { class: "set-name", lang: "en" }, s.title),
+          done.includes(s.setId) && h("span", { class: "set-done" }, "✓ 練習済み")
+        ),
+        h("span", { class: "set-check", "aria-hidden": "true" }, "✓")
       )
     )
   );
@@ -814,6 +831,7 @@ async function api(path, body) {
 
 function show(name) {
   for (const s of document.querySelectorAll(".screen")) s.hidden = s.id !== `screen-${name}`;
+  document.body.dataset.screen = name; // 面接中だけ背景を落ち着いた色にする
   window.scrollTo(0, 0);
 }
 
