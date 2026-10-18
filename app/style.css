@@ -256,6 +256,92 @@ input[type="password"]:focus { outline: 2px solid var(--accent); border-color: t
   .pictures { grid-template-columns: 1fr 1fr; }
 }
 
+/* 2級の3コマ漫画。スマホでは縦に、広い画面では本物のカードと同じく横に並べる */
+.story-lead { font-family: var(--serif); font-size: 1.02rem; line-height: 1.6; margin: 0 0 14px; padding: 0 8px; }
+.story-panels { display: flex; flex-direction: column; align-items: center; border-radius: 6px; }
+.story-panel { position: relative; margin: 0; width: min(100%, 360px); container-type: inline-size; }
+.story-panel img { display: block; width: 100%; height: auto; border-radius: 3px; background: #fff; }
+.story-arrow { display: flex; justify-content: center; margin: 8px 0 16px; }
+.story-arrow span {
+  position: relative;
+  display: inline-block;
+  max-width: 220px;
+  padding: 5px 12px;
+  background: #fff;
+  border: 2px solid #222;
+  border-radius: 6px;
+  font-family: var(--serif);
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.25;
+  text-align: center;
+  color: #222;
+}
+.story-arrow span::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -13px;
+  transform: translateX(-50%);
+  border-style: solid;
+  border-width: 11px 9px 0 9px;
+  border-color: #222 transparent transparent transparent;
+}
+@media (min-width: 700px) {
+  .story-panels { flex-direction: row; align-items: stretch; gap: 26px; }
+  .story-panel { flex: 1 1 0; width: auto; min-width: 0; }
+  /* 矢印はコマの境目に重ねる */
+  .story-arrow { position: relative; width: 0; margin: 0 -13px; z-index: 1; display: block; }
+  .story-arrow span {
+    position: absolute;
+    top: 38%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 92px;
+    padding: 5px 6px;
+    font-size: 0.8rem;
+  }
+  .story-arrow span::after {
+    left: auto;
+    right: -12px;
+    bottom: auto;
+    top: 50%;
+    transform: translateY(-50%);
+    border-width: 9px 0 9px 11px;
+    border-color: transparent transparent transparent #222;
+  }
+}
+
+/* 1コマ目のせりふ。画像の上部の空いたところに重ねる */
+.speech {
+  position: absolute;
+  top: 3%;
+  max-width: 80%;
+  margin: 0;
+  padding: 0.45em 0.75em;
+  background: #fff;
+  border: 2px solid #222;
+  border-radius: 14px;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-size: clamp(11px, 5cqw, 16px);
+  font-weight: 600;
+  line-height: 1.3;
+  color: #222;
+}
+.speech-left { left: 4%; }
+.speech-right { right: 4%; }
+.speech::after {
+  content: "";
+  position: absolute;
+  bottom: -12px;
+  border-style: solid;
+  border-width: 12px 8px 0 8px;
+  border-color: #222 transparent transparent transparent;
+}
+.speech-left::after { left: 22%; }
+.speech-right::after { right: 22%; }
+
 /* 下の操作パネル */
 .dock {
   background: var(--surface);
@@ -332,7 +418,9 @@ input[type="password"]:focus { outline: 2px solid var(--accent); border-color: t
 }
 .fb-head h2 { font-size: 1.15rem; margin: 0; }
 .fb-question { margin: 2px 0 12px; color: var(--muted); font-size: 0.95rem; }
-.fb-picture { display: block; width: 100%; max-width: 360px; border-radius: 6px; border: 1px solid var(--line); margin: 0 0 12px; }
+.fb-pictures { margin: 0 0 12px; }
+.fb-picture { display: block; width: 100%; max-width: 360px; border-radius: 6px; border: 1px solid var(--line); }
+.fb-pictures.multi { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; max-width: 480px; }
 .fb-answer { margin-bottom: 12px; }
 .fb-clip { margin: 4px 0 8px; }
 .fb-clip-label { margin: 0 0 2px; font-size: 0.85rem; color: var(--muted); }
@@ -531,6 +619,33 @@ body:not([data-screen="interview"]) {
   font-weight: 800;
 }
 .set-item[aria-checked="true"] .set-check { background: var(--c); border-color: var(--c); color: #fff; }
+
+.change-grade { font-size: 0.85rem; font-weight: 700; color: var(--accent); margin-left: 6px; }
+
+/* トップページの級ボタン（ルートの index.html） */
+.grade-list { display: grid; gap: 14px; }
+.grade-item {
+  --c: #2f80ed;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  border-radius: 18px;
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-left: 10px solid var(--c);
+  color: var(--text);
+  text-decoration: none;
+  box-shadow: 0 5px 0 var(--c);
+  transition: transform 0.08s, box-shadow 0.08s;
+  touch-action: manipulation;
+}
+.grade-item:active { transform: translateY(3px); box-shadow: 0 2px 0 var(--c); }
+.grade-name { font-family: var(--pop); font-size: 1.7rem; font-weight: 800; color: var(--c); min-width: 3.4em; }
+.grade-desc { font-weight: 700; color: var(--muted); font-size: 0.92rem; line-height: 1.4; }
+.grade-item::after { content: "›"; margin-left: auto; font-size: 2rem; font-weight: 800; color: var(--c); line-height: 1; }
+.grade-item.is-soon { box-shadow: none; opacity: 0.55; cursor: default; }
+.grade-item.is-soon::after { content: none; }
 
 .guide summary { cursor: pointer; font-weight: 800; color: var(--accent); min-height: 32px; }
 .guide[open] summary { margin-bottom: 12px; }

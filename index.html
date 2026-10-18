@@ -2,13 +2,44 @@
 <html lang="ja">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light">
   <title>ニジトレ -英検2次試験対策アプリ-</title>
-  <!-- いまは準2級だけなのでアプリへ直行する。級を選ぶトップページはここに作る -->
-  <meta http-equiv="refresh" content="0; url=app/">
-  <script>location.replace("app/" + location.search);</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700;800&display=swap">
+  <link rel="stylesheet" href="app/style.css">
 </head>
 <body>
-  <p><a href="app/">ニジトレを開く</a></p>
+
+<!-- トップページ：級を選ぶ。どの級も同じアプリ（app/）を ?grade= で切り替えて使う -->
+<main class="page">
+  <header class="hero">
+    <div class="rainbow" aria-hidden="true"></div>
+    <span class="hello" aria-hidden="true">Hello!</span>
+    <p class="brand">ニジトレ</p>
+    <p class="brand-sub">英検2次試験対策アプリ</p>
+  </header>
+  <p class="lead">英検の面接を、<br>本番そっくりに練習しよう！</p>
+
+  <div class="panel">
+    <h2>どの級を練習する？</h2>
+    <nav class="grade-list" aria-label="級">
+      <a class="grade-item" href="app/?grade=grade2" style="--c: #2f80ed">
+        <span class="grade-name">2級</span>
+        <span class="grade-desc">3コマの絵の説明<br>質問4問</span>
+      </a>
+      <a class="grade-item" href="app/?grade=pre2" style="--c: #f0447a">
+        <span class="grade-name">準2級</span>
+        <span class="grade-desc">イラスト2枚<br>質問5問</span>
+      </a>
+      <span class="grade-item is-soon" style="--c: #9aa3b2" aria-disabled="true">
+        <span class="grade-name">3級</span>
+        <span class="grade-desc">準備中</span>
+      </span>
+    </nav>
+  </div>
+</main>
+
 </body>
 </html>

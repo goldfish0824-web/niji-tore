@@ -2,7 +2,9 @@ import { WORKER_URL } from "./config.js";
 import { Recorder } from "./recorder.js";
 
 const params = new URLSearchParams(location.search);
-const GRADE = params.get("grade") || "pre2";
+const GRADE = params.get("grade");
+// 級の指定がなければトップページ（級を選ぶ画面）へ戻す
+if (!GRADE) location.replace(new URL("../", location.href));
 // 動作確認用: ?timescale=0.1 で黙読・解答の時間を10分の1にする
 const TIME_SCALE = Number(params.get("timescale")) || 1;
 const ROOT = new URL("../", location.href);
@@ -41,6 +43,7 @@ const state = {
 // 起動（呼び出しはファイル末尾。下で宣言する定数を使うため）
 
 async function init() {
+  if (!GRADE) return;
   speech.init();
   bindEvents();
   state.showText = storage.get(SHOW_TEXT_KEY) === "1";
@@ -62,6 +65,7 @@ async function init() {
   const done = doneSets();
   const { sets } = state.data;
   selectSet(sets.find((s) => s.setId === want) || sets.find((s) => !done.includes(s.setId)) || sets[0]);
+  renderFlow();
   $("#guide").open = done.length === 0;
 
   if (!WORKER_URL) {
@@ -181,6 +185,22 @@ function renderSetList() {
   );
 }
 
+/** 準備画面の「流れ」を、級ごとの問題の並びから作る。 */
+function renderFlow() {
+  const first = state.data.sets[0];
+  const qs = first.questions;
+  const turn = qs.findIndex((q) => q.type === "opinion" || q.type === "personal");
+  const range = (list) =>
+    list.length > 2 ? `No.${list[0].no}〜No.${list.at(-1).no}` : list.map((q) => `No.${q.no}`).join("・");
+  const story = qs.find((q) => q.type === "story");
+  $("#flow").replaceChildren(
+    h("li", {}, `パッセージを黙読（${first.reading.prepSeconds}秒）してから音読`),
+    h("li", {}, `${range(qs.slice(0, turn))} はカードを見て答える`, story && `（No.${story.no} は3コマの絵を説明する）`),
+    h("li", {}, `カードを裏返して ${range(qs.slice(turn))} に答える`),
+    h("li", {}, "終わったら、録音をもとに講評を見る")
+  );
+}
+
 function doneSets() {
   try {
     const list = JSON.parse(storage.get(`${DONE_KEY}.${GRADE}`) || "[]");
@@ -285,6 +305,8 @@ async function runInterview(signal) {
         hint: "「ピッ」と鳴ったら録音が始まります。それまでは頭の中で考えましょう。",
         speakWarning: "まだ録音していません。「ピッ」と鳴ってから話してください。",
       });
+      // 2級の No.2 は考える時間のあとに "Please begin." と言われる
+      if (L.begin) await say(L.begin);
     }
 
     if (q.type === "personal") {
@@ -306,7 +328,12 @@ async function runInterview(signal) {
       await say(followUp);
       state.clips[`${id}b`] = (await recordAnswer(signal, { label: `No.${q.no}`, seconds: q.answerSeconds, repeat: followUp })).clip;
     } else {
-      state.clips[id] = (await recordAnswer(signal, { label: `No.${q.no}`, seconds: q.answerSeconds, repeat: question })).clip;
+      state.clips[id] = (await recordAnswer(signal, {
+        label: `No.${q.no}`,
+        seconds: q.answerSeconds,
+        repeat: question,
+        hint: q.type === "story" ? "カードに書かれた文から話し始めましょう。" : "",
+      })).clip;
     }
   }
 
@@ -432,7 +459,7 @@ function phase(signal, { label, seconds, hint = "", repeat = null, choices = nul
 function questionLine(q) {
   if (q.prompt) return q.prompt;
   const L = state.data.interviewerLines;
-  if (q.type === "pictureA") return L.q2;
+  if (q.type === "pictureA" || q.type === "story") return L.q2;
   if (q.type === "pictureB") return L.q3.replace("{subject}", q.subject || "person");
   return "";
 }
@@ -558,8 +585,31 @@ function fillCard() {
   const { set } = state;
   $("#card-title").textContent = set.title;
   $("#card-passage").textContent = set.passage;
-  $("#pic-a").src = asset(set.pictureA);
-  $("#pic-b").src = asset(set.pictureB);
+  // 準2級はイラスト2枚、2級は3コマ漫画
+  $("#pictures").hidden = Boolean(set.story);
+  $("#story").hidden = !set.story;
+  if (set.story) {
+    renderStory(set.story);
+  } else {
+    $("#pic-a").src = asset(set.pictureA);
+    $("#pic-b").src = asset(set.pictureB);
+  }
+}
+
+/** 3コマと、コマの間の矢印の語句、1コマ目のせりふ。画像には文字がないので、ここで重ねる。 */
+function renderStory(story) {
+  $("#story-first").textContent = story.firstSentence;
+  $("#story-panels").replaceChildren(
+    ...story.panels.flatMap((p, i) => [
+      p.arrow && h("div", { class: "story-arrow" }, h("span", { lang: "en" }, p.arrow)),
+      h(
+        "figure",
+        { class: "story-panel" },
+        h("img", { src: asset(p.image), alt: `${i + 1}コマ目` }),
+        p.speech && h("p", { class: `speech speech-${p.speech.side === "right" ? "right" : "left"}`, lang: "en" }, p.speech.text)
+      ),
+    ]).filter(Boolean)
+  );
 }
 
 function asset(path) {
@@ -573,7 +623,7 @@ function showCard(side) {
 }
 
 function focusCard(type) {
-  const target = { passage: "#card-passage", pictureA: "#fig-a", pictureB: "#fig-b" }[type];
+  const target = { passage: "#card-passage", pictureA: "#fig-a", pictureB: "#fig-b", story: "#story" }[type];
   for (const el of document.querySelectorAll(".card .focus")) el.classList.remove("focus");
   if (!target) return;
   const el = $(target);
@@ -705,12 +755,16 @@ function renderFeedback(items, overall = null) {
   for (const q of set.questions) {
     const id = `q${q.no}`;
     const followUp = state.choices[q.no] === "no" ? L.noFollowUp : L.yesFollowUp;
-    const picture = q.type === "pictureA" ? set.pictureA : q.type === "pictureB" ? set.pictureB : null;
+    const pictures =
+      q.type === "pictureA" ? [set.pictureA]
+      : q.type === "pictureB" ? [set.pictureB]
+      : q.type === "story" ? set.story.panels.map((p) => p.image)
+      : null;
     list.push(
       feedbackItem({
         title: `No.${q.no}`,
         question: questionLine(q),
-        picture,
+        pictures,
         clips: q.type === "personal" ? [["Yes / No", state.clips[`${id}a`]], [followUp, state.clips[`${id}b`]]] : [["", state.clips[id]]],
         ai: byId.get(id),
         extra: q.modelAnswer?.length
@@ -730,12 +784,17 @@ function renderFeedback(items, overall = null) {
   show("feedback");
 }
 
-function feedbackItem({ title, question, picture = null, clips, ai, extra }) {
+function feedbackItem({ title, question, pictures = null, clips, ai, extra }) {
   return h(
     "article",
     { class: "fb-item" },
     h("header", { class: "fb-head" }, h("h2", {}, title), h("p", { class: "fb-question", lang: "en" }, question)),
-    picture && h("img", { class: "fb-picture", src: asset(picture), alt: "", loading: "lazy" }),
+    pictures &&
+      h(
+        "div",
+        { class: `fb-pictures${pictures.length > 1 ? " multi" : ""}` },
+        pictures.map((src) => h("img", { class: "fb-picture", src: asset(src), alt: "", loading: "lazy" }))
+      ),
     h(
       "section",
       { class: "fb-answer" },

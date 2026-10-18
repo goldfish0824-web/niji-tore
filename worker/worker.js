@@ -264,7 +264,7 @@ function itemIds(set) {
 function questionText(data, q) {
   if (q.prompt) return q.prompt;
   const L = data.interviewerLines;
-  if (q.type === "pictureA") return L.q2;
+  if (q.type === "pictureA" || q.type === "story") return L.q2;
   if (q.type === "pictureB") return L.q3.replace("{subject}", q.subject || "person");
   return "";
 }
@@ -373,10 +373,16 @@ function buildRequest(data, set, clips, choices) {
   for (const q of set.questions) {
     const id = `q${q.no}`;
     const points = [...(CP[q.type] || []), ...(q.extraCheckPoints || [])];
+    const answers = q.modelAnswer || [];
+    // 意見を問う問題は、agree / disagree や Yes / No の別解が並んでいる
+    const model = (q.type === "opinion" || q.type === "personal") && answers.length > 1
+      ? `【解答例（別解の並び。どちらの立場で答えてもよい）】\n${bullets(answers)}`
+      : `【解答例】${answers.join(" ")}`;
     text(
       `\n===== id: ${id} =====\n` +
       `【質問】No.${q.no} ${questionText(data, q)}\n` +
-      `【解答例】${(q.modelAnswer || []).join(" ")}\n` +
+      (q.type === "story" && set.story ? storyCard(set.story) : "") +
+      `${model}\n` +
       `【見るべき点】\n${bullets(points)}`
     );
     if (hasFollowUp(q)) {
@@ -402,6 +408,16 @@ function buildRequest(data, set, clips, choices) {
       maxOutputTokens: 16384,
     },
   };
+}
+
+/** 2級の3コマ漫画について、カードに印刷されている文字の情報（絵の中身は解答例で伝える）。 */
+function storyCard(story) {
+  const lines = [`【カードの書き出しの文】${story.firstSentence}`];
+  story.panels.forEach((p, i) => {
+    if (p.arrow) lines.push(`【${i + 1}コマ目の前の矢印の語句】${p.arrow}`);
+    if (p.speech) lines.push(`【${i + 1}コマ目のせりふ】"${p.speech.text}"`);
+  });
+  return `${lines.join("\n")}\n`;
 }
 
 async function callGemini(env, body) {

@@ -29,7 +29,7 @@
     <p class="brand">ニジトレ</p>
     <p class="brand-sub">英検2次試験対策アプリ</p>
   </header>
-  <p class="lead"><span class="grade-pill" data-grade-label></span>の面接を、<br>本番そっくりに練習しよう！</p>
+  <p class="lead"><span class="grade-pill" data-grade-label></span>の面接を、<br>本番そっくりに練習しよう！<br><a class="change-grade" href="../">級を変える</a></p>
   <form id="login-form" class="panel">
     <label for="password">パスワード</label>
     <input id="password" type="password" autocomplete="current-password" autocapitalize="off" spellcheck="false" required>
@@ -45,7 +45,7 @@
     <p class="brand">ニジトレ</p>
     <p class="brand-sub">英検2次試験対策アプリ</p>
   </header>
-  <p class="lead"><span class="grade-pill" data-grade-label></span> 面接練習</p>
+  <p class="lead"><span class="grade-pill" data-grade-label></span> 面接練習 <a class="change-grade" href="../">級を変える</a></p>
 
   <div class="panel">
     <h2>どの回で練習する？</h2>
@@ -56,12 +56,8 @@
   <details id="guide" class="panel guide">
     <summary>流れと、はじめる前の注意</summary>
     <h2>流れ</h2>
-    <ol class="flow">
-      <li>パッセージを黙読（20秒）してから音読</li>
-      <li>No.1〜No.3 はカードを見て答える</li>
-      <li>カードを裏返して No.4・No.5 に答える</li>
-      <li>終わったら、録音をもとに講評を見る</li>
-    </ol>
+    <!-- 中身は main.js が級ごとの問題の並びから作る -->
+    <ol id="flow" class="flow"></ol>
     <h2>はじめる前に</h2>
     <ul class="tips">
       <li>面接官の声が出ます。音量を上げてください。</li>
@@ -104,9 +100,14 @@
     <article id="card-front" class="card">
       <h2 id="card-title" class="card-title" lang="en"></h2>
       <p id="card-passage" class="card-passage" lang="en"></p>
-      <div class="pictures">
+      <div id="pictures" class="pictures">
         <figure id="fig-a"><figcaption>A</figcaption><img id="pic-a" alt="イラストA"></figure>
         <figure id="fig-b"><figcaption>B</figcaption><img id="pic-b" alt="イラストB"></figure>
+      </div>
+      <!-- 2級の3コマ漫画 -->
+      <div id="story" class="story" hidden>
+        <p class="story-lead" lang="en">Your story should begin with this sentence: <strong id="story-first"></strong></p>
+        <div id="story-panels" class="story-panels"></div>
       </div>
     </article>
     <div id="card-back" class="card card-back" hidden>
