@@ -1,8 +1,8 @@
 {
   "grade": "grade2",
   "gradeLabel": "英検2級",
-  "version": "2026-10-17",
-  "status": "draft: 画像の生成待ち。画像ができたら No.2 の解答例と speech.side を実物に合わせて直す",
+  "version": "2026-10-18",
+  "status": "draft: 第1〜3回は画像を取り込み済み（解答例は画像と照合済み）。第4・5回は画像待ち",
   "interviewerLines": {
     "start": "Let's start the test. Here's your card.",
     "silentReading": "First, please read the passage silently for 20 seconds.",

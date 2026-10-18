@@ -61,6 +61,42 @@ Simple, clean educational illustration for an English exam card: a three-panel c
 - 手や指が破綻していないか
 - 実在の人物や商標に似ていないか
 
+話している人が右側にいる場合は、描き直さなくてよい（`speech.side` を `right` にすれば吹き出しの向きを合わせられる）。
+
+### 直す用のプロンプト（画像をアップロードして使う）
+
+崩れた画像を Gemini にアップロードし、当てはまるものを貼る。［ ］の中を書き換える。直したい点が複数あるときは、1回に1つずつ直させるほうが失敗しにくい。
+
+1コマだけ描き直す:
+
+```text
+Edit this image. Keep the other two panels exactly as they are. Redraw only panel [2] so that [the red warning lamp on top of the machine is clearly lit and larger]. Keep the same characters, faces, clothes, art style, panel size, and white gaps. Do not add any text.
+```
+
+文字が入ってしまった:
+
+```text
+Edit this image. Remove all letters, words, numbers, and logos, including those on screens, signs, posters, and packages. Replace them with plain colors or simple pictures. Change nothing else.
+```
+
+1コマ目の上が空いていない:
+
+```text
+Edit this image. In panel 1, make the top quarter of the panel a plain empty wall with nothing on it, by moving or shrinking anything that is there. Keep everything else the same.
+```
+
+人物の見た目がコマによって違う:
+
+```text
+Edit this image. Make [the grandmother] look exactly the same in all three panels: [an elderly woman with short gray hair, wearing a purple cardigan]. Change nothing else.
+```
+
+コマの大きさがそろっていない、矢印や飾りがある:
+
+```text
+Edit this image. Make the three panels exactly the same size, each with a thin black border, separated by plain white gaps with nothing in them. Remove any arrows. Keep the contents of each panel the same.
+```
+
 ---
 
 ## Set 1 — Saving Leftover Food
