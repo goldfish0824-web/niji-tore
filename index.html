@@ -11,6 +11,15 @@
   <link rel="stylesheet" href="app/style.css">
 </head>
 <body>
+<!-- 背景にただよう吹き出し（飾り） -->
+<div class="bg-bubbles" aria-hidden="true">
+  <span style="--x: 5%; --y: 12%; --c: #f0447a; --t: 7s">Good morning!</span>
+  <span style="--x: 80%; --y: 18%; --c: #2f80ed; --t: 9s">How are you?</span>
+  <span style="--x: 3%; --y: 56%; --c: #23a565; --t: 8s">Nice to meet you.</span>
+  <span style="--x: 83%; --y: 62%; --c: #7b5cf0; --t: 10s">I agree.</span>
+  <span class="low" style="--x: 6%; --y: 88%; --c: #f57c1f; --t: 9s">Thank you!</span>
+  <span class="low" style="--x: 62%; --y: 93%; --c: #2f80ed; --t: 11s">See you!</span>
+</div>
 
 <!-- トップページ：級を選ぶ。どの級も同じアプリ（app/）を ?grade= で切り替えて使う -->
 <main class="page">
@@ -25,21 +34,36 @@
   <div class="panel">
     <h2>どの級を練習する？</h2>
     <nav class="grade-list" aria-label="級">
-      <a class="grade-item" href="app/?grade=grade2" style="--c: #2f80ed">
+      <a class="grade-item" href="app/?grade=grade2" data-grade="grade2" style="--c: #2f80ed">
         <span class="grade-name">2級</span>
-        <span class="grade-desc">3コマの絵の説明<br>質問4問</span>
+        <span class="grade-desc">3コマの絵の説明<br>質問4問<span class="grade-progress"></span></span>
       </a>
-      <a class="grade-item" href="app/?grade=pre2" style="--c: #f0447a">
+      <a class="grade-item" href="app/?grade=pre2" data-grade="pre2" style="--c: #f0447a">
         <span class="grade-name">準2級</span>
-        <span class="grade-desc">イラスト2枚<br>質問5問</span>
+        <span class="grade-desc">イラスト2枚<br>質問5問<span class="grade-progress"></span></span>
       </a>
-      <a class="grade-item" href="app/?grade=grade3" style="--c: #23a565">
+      <a class="grade-item" href="app/?grade=grade3" data-grade="grade3" style="--c: #23a565">
         <span class="grade-name">3級</span>
-        <span class="grade-desc">イラスト1枚<br>質問5問</span>
+        <span class="grade-desc">イラスト1枚<br>質問5問<span class="grade-progress"></span></span>
       </a>
     </nav>
   </div>
 </main>
+
+<script>
+  // この端末で練習し終えた回の数（app/main.js が localStorage に記録している）
+  for (const item of document.querySelectorAll(".grade-item[data-grade]")) {
+    let done = [];
+    try {
+      done = JSON.parse(localStorage.getItem("eiken2ji.done." + item.dataset.grade) || "[]");
+    } catch {
+      done = [];
+    }
+    if (Array.isArray(done) && done.length) {
+      item.querySelector(".grade-progress").textContent = "✓ " + done.length + "回分 練習済み";
+    }
+  }
+</script>
 
 </body>
 </html>

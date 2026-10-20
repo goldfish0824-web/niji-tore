@@ -251,6 +251,7 @@ async function startInterview() {
     state.running = null;
     markDone(state.set.setId);
     renderDone();
+    celebrate();
   } catch (err) {
     state.running = null;
     if (err.name !== "AbortError") console.error(err);
@@ -270,6 +271,7 @@ async function runInterview(signal) {
   const say = (text) => speak(text, signal);
 
   showCard("front");
+  replayAnimation($("#card-front"), "card-in"); // "Here's your card." でカードを手渡す
   focusCard("passage");
   await say(L.start);
   await say(L.silentReading);
@@ -628,9 +630,20 @@ function asset(path) {
 }
 
 function showCard(side) {
-  $("#card-front").hidden = side !== "front";
-  $("#card-back").hidden = side !== "back";
-  $("#card-returned").hidden = side !== "returned";
+  for (const [name, sel] of [["front", "#card-front"], ["back", "#card-back"], ["returned", "#card-returned"]]) {
+    const el = $(sel);
+    const appearing = name === side && el.hidden;
+    el.hidden = name !== side;
+    // 裏返すときはくるっと回し、返すときはすっと出す
+    if (appearing) replayAnimation(el, name === "back" ? "flip-in" : "card-in");
+  }
+}
+
+/** CSS アニメーションを最初から流し直す。 */
+function replayAnimation(el, className) {
+  el.classList.remove(className);
+  void el.offsetWidth;
+  el.classList.add(className);
 }
 
 function focusCard(type) {
@@ -706,7 +719,7 @@ function renderLevel(rms) {
   if (voice.counting && rms >= VOICE_RMS) voice.ms += 50;
   const db = 20 * Math.log10(rms + 1e-8);
   const pct = Math.max(0, Math.min(1, (db + 60) / 50));
-  $("#level-bar").style.width = `${pct * 100}%`;
+  $("#level").style.setProperty("--lvl", pct.toFixed(2));
 }
 
 // ---------------------------------------------------------------------------
@@ -737,6 +750,7 @@ async function requestFeedback() {
   }
 
   show("loading");
+  const stopSteps = startLoadingSteps();
   try {
     const res = await api("/api/feedback", form);
     state.limit = res.limit;
@@ -746,7 +760,47 @@ async function requestFeedback() {
     if (typeof err.payload?.remaining === "number") state.remaining = err.payload.remaining;
     renderDone();
     $("#done-error").textContent = err.message;
+  } finally {
+    stopSteps();
   }
+}
+
+/** 講評を待つ間、今なにをしているかを順に出す（実際の進み具合ではなく目安）。 */
+function startLoadingSteps() {
+  const steps = [
+    "録音を聞いています…",
+    "話した英語を書き起こしています…",
+    "問題ごとのコメントを書いています…",
+    "全体の講評をまとめています…",
+    "もう少しです…",
+  ];
+  let i = 0;
+  $("#loading-step").textContent = steps[0];
+  replayAnimation($("#loading-bar-fill"), "run");
+  const timer = setInterval(() => {
+    if (i >= steps.length - 1) return;
+    i++;
+    $("#loading-step").textContent = steps[i];
+    replayAnimation($("#loading-step"), "step-in");
+  }, 7000);
+  return () => clearInterval(timer);
+}
+
+/** 面接を最後まで終えたときの紙吹雪。 */
+function celebrate() {
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const colors = ["#f0447a", "#f57c1f", "#f5b400", "#23a565", "#2f80ed", "#7b5cf0"];
+  const box = h("div", { class: "confetti", "aria-hidden": "true" });
+  for (let i = 0; i < 48; i++) {
+    const r = (min, max) => (min + Math.random() * (max - min)).toFixed(2);
+    box.append(
+      h("i", {
+        style: `--x: ${r(0, 100)}vw; --s: ${r(-20, 20)}vw; --d: ${r(0, 0.8)}s; --t: ${r(2.2, 3.8)}s; --r: ${r(-540, 540)}deg; background: ${colors[i % colors.length]}`,
+      })
+    );
+  }
+  document.body.append(box);
+  setTimeout(() => box.remove(), 5000);
 }
 
 function renderFeedback(items, overall = null) {
