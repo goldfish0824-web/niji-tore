@@ -242,4 +242,4 @@ Scene: inside an aquarium. A large glass water tank fills the back wall, with co
 
 ## 残りの作業
 
-- 画像ができたら、No.2・No.3 の解答例を実物に合わせて直し、トップページの3級ボタンを「準備中」から使える状態にする
+- 5回分の画像を取り込み、No.2・No.3 の解答例を照合済み（2026-10-20）。第1回 No.3 は、女の子がすでにギターを持っている絵なので on the stage まで入れた

@@ -2,7 +2,7 @@
   "grade": "grade3",
   "gradeLabel": "英検3級",
   "version": "2026-10-20",
-  "status": "draft: 第1〜3回は画像を取り込み済み（解答例は画像と照合済み）。第4回は卵の数を直し待ち、第5回は画像待ち",
+  "status": "5回分の画像を取り込み済み。No.2・No.3 の解答例は画像と照合済み",
   "interviewerLines": {
     "start": "Let's start the test. Here's your card.",
     "silentReading": "First, please read the passage silently for 20 seconds.",

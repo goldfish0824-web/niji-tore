@@ -10,8 +10,8 @@
 
 - 準2級：問題5セット（パッセージ・イラスト・質問・解答例）が完成
 - 2級：問題5回分と3コマ画像が完成し、アプリで練習できる（`docs/spec-grade2.md`）
-- 3級：問題5回分と画像生成プロンプトの下書きが完成（`docs/spec-grade3.md`）。画像の生成待ち
-- アプリ本体：準2級の第1〜5回を選んで、黙読 → 音読 → No.1〜5 → 講評表示まで通せる。iPhone で確認済み
+- 3級：問題5回分とイラストが完成し、アプリで練習できる（`docs/spec-grade3.md`）
+- アプリ本体：トップページで級を選び、各級の第1〜5回を黙読 → 音読 → 質問 → 講評表示まで通せる。iPhone で確認済み
 - Cloudflare Worker：配置済み（手順は `worker/README.md`）
 
 ## 手元で動かす
@@ -33,10 +33,10 @@ python -m http.server 8000
 | `docs/spec-grade3.md` | 3級の仕様書。イラストの生成プロンプト |
 | `data/pre2/sets.json` | 準2級の問題データ |
 | `data/grade2/sets.json` | 2級の問題データ |
-| `data/grade3/sets.json` | 3級の問題データ（下書き） |
+| `data/grade3/sets.json` | 3級の問題データ |
 | `data/README.md` | sets.json のスキーマ |
 | `data/feedback-prompt.md` | AIに渡す講評プロンプトの下書き |
-| `images/pre2/` | 準2級のイラスト（`pre2-01-a.jpg` 形式） |
+| `images/<grade>/` | イラスト（準2級 `pre2-01-a.jpg`、2級 `grade2-01-1.jpg`、3級 `grade3-01.jpg` の形式） |
 | `scripts/rename_images.py` | `_incoming` の画像を正式名にリネームする |
 | `scripts/make_thumbs.py` | 問題選択画面に出す小さな画像をイラストAから作る |
 | `scripts/split_panels.py` | 2級の3コマ漫画（1枚絵）をコマごとの画像に切り分ける |
