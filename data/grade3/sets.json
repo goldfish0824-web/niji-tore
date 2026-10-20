@@ -2,7 +2,7 @@
   "grade": "grade3",
   "gradeLabel": "英検3級",
   "version": "2026-10-20",
-  "status": "draft: 画像の生成待ち。画像ができたら No.2・No.3 の解答例を実物に合わせて直す",
+  "status": "draft: 第1〜3回は画像を取り込み済み（解答例は画像と照合済み）。第4回は卵の数を直し待ち、第5回は画像待ち",
   "interviewerLines": {
     "start": "Let's start the test. Here's your card.",
     "silentReading": "First, please read the passage silently for 20 seconds.",
@@ -70,8 +70,8 @@
           "prompt": "Please look at the girl. What is she going to do?",
           "prepSeconds": 0,
           "answerSeconds": 20,
-          "modelAnswer": ["She's going to play the guitar."],
-          "extraCheckPoints": ["be going to ＋ 動詞の原形で答えているか"]
+          "modelAnswer": ["She's going to play the guitar on the stage."],
+          "extraCheckPoints": ["be going to ＋ 動詞の原形で答えているか", "絵の女の子はすでにギターを持っているので、思考の吹き出しにある on the stage まで言えるとよい"]
         },
         {
           "no": 4,
