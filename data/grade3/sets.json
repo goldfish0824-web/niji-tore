@@ -1,0 +1,319 @@
+{
+  "grade": "grade3",
+  "gradeLabel": "英検3級",
+  "version": "2026-10-20",
+  "status": "draft: 画像の生成待ち。画像ができたら No.2・No.3 の解答例を実物に合わせて直す",
+  "interviewerLines": {
+    "start": "Let's start the test. Here's your card.",
+    "silentReading": "First, please read the passage silently for 20 seconds.",
+    "readAloud": "Now, please read it aloud.",
+    "q1": "Now, I'll ask you five questions.",
+    "turnOver": "Now, please turn the card over.",
+    "yesFollowUp": "Please tell me more.",
+    "end": "This is the end of the test. Could I have the card back, please?"
+  },
+  "checkPoints": {
+    "reading": [
+      "タイトルから読み始めているか",
+      "意味のまとまりで区切れているか",
+      "語の読み飛ばし・読み足しがないか"
+    ],
+    "passage": [
+      "質問に合った形で答えているか（Why と聞かれたら Because ...）",
+      "本文の該当箇所を使えているか",
+      "主語を代名詞（they など）に変えているか"
+    ],
+    "picture": [
+      "主語と動詞のある文で答えているか（She's ... / There are ... など）",
+      "質問の形に合った言い方をしているか（is -ing / be going to / There are）",
+      "絵の内容と合っているか"
+    ],
+    "self": [
+      "質問に合った内容を、主語と動詞のある文で答えているか",
+      "質問と同じ時制で答えているか",
+      "できれば理由や具体例をもう1文足しているか"
+    ],
+    "personal": [
+      "Yes / No ではっきり答えているか",
+      "続けて聞かれた質問に、主語と動詞のある文で答えているか",
+      "質問と同じ時制で答えているか"
+    ]
+  },
+  "sets": [
+    {
+      "setId": "grade3-01",
+      "title": "School Festivals",
+      "passage": "Many schools in Japan have school festivals every year. Students sing songs, act in plays, and sell food. They can work together with their classmates, so school festivals are good chances to make friends.",
+      "pictureA": "images/grade3/grade3-01.jpg",
+      "reading": { "prepSeconds": 20, "answerSeconds": 45 },
+      "questions": [
+        {
+          "no": 1,
+          "type": "passage",
+          "prompt": "Please look at the passage. Why are school festivals good chances to make friends?",
+          "prepSeconds": 0,
+          "answerSeconds": 25,
+          "modelAnswer": ["Because students can work together with their classmates."]
+        },
+        {
+          "no": 2,
+          "type": "picture",
+          "prompt": "Please look at the picture. How many balloons are there?",
+          "prepSeconds": 0,
+          "answerSeconds": 20,
+          "modelAnswer": ["There are three balloons."],
+          "extraCheckPoints": ["There are ＋ 数 の形で答えているか"]
+        },
+        {
+          "no": 3,
+          "type": "picture",
+          "prompt": "Please look at the girl. What is she going to do?",
+          "prepSeconds": 0,
+          "answerSeconds": 20,
+          "modelAnswer": ["She's going to play the guitar."],
+          "extraCheckPoints": ["be going to ＋ 動詞の原形で答えているか"]
+        },
+        {
+          "no": 4,
+          "type": "self",
+          "prompt": "What do you usually do after school?",
+          "prepSeconds": 0,
+          "answerSeconds": 20,
+          "modelAnswer": ["I usually practice soccer with my friends."]
+        },
+        {
+          "no": 5,
+          "type": "personal",
+          "prompt": "Do you like to sing songs?",
+          "noFollowUp": "What do you like to do in your free time?",
+          "prepSeconds": 0,
+          "answerSeconds": 20,
+          "modelAnswer": [
+            "Yes. (Please tell me more.) I often sing songs with my friends at karaoke.",
+            "No. (What do you like to do in your free time?) I like to read comic books."
+          ]
+        }
+      ]
+    },
+    {
+      "setId": "grade3-02",
+      "title": "Riding Bicycles",
+      "passage": "Many people enjoy riding bicycles. Bicycles are good for our health, and they do not make the air dirty. Some people go to school by bicycle, so they can get exercise every day.",
+      "pictureA": "images/grade3/grade3-02.jpg",
+      "reading": { "prepSeconds": 20, "answerSeconds": 45 },
+      "questions": [
+        {
+          "no": 1,
+          "type": "passage",
+          "prompt": "Please look at the passage. Why can some people get exercise every day?",
+          "prepSeconds": 0,
+          "answerSeconds": 25,
+          "modelAnswer": ["Because they go to school by bicycle."]
+        },
+        {
+          "no": 2,
+          "type": "picture",
+          "prompt": "Please look at the picture. Where is the dog?",
+          "prepSeconds": 0,
+          "answerSeconds": 20,
+          "modelAnswer": ["It's under the bench."],
+          "extraCheckPoints": ["It's ＋ 場所を表す語句（under the bench など）の形で答えているか"]
+        },
+        {
+          "no": 3,
+          "type": "picture",
+          "prompt": "Please look at the woman. What is she doing?",
+          "prepSeconds": 0,
+          "answerSeconds": 20,
+          "modelAnswer": ["She's riding a bicycle."],
+          "extraCheckPoints": ["is ＋ -ing の形で答えているか"]
+        },
+        {
+          "no": 4,
+          "type": "self",
+          "prompt": "How do you usually go to school?",
+          "prepSeconds": 0,
+          "answerSeconds": 20,
+          "modelAnswer": ["I usually go to school by bus."]
+        },
+        {
+          "no": 5,
+          "type": "personal",
+          "prompt": "Do you often watch sports on TV?",
+          "noFollowUp": "What do you like to watch on TV?",
+          "prepSeconds": 0,
+          "answerSeconds": 20,
+          "modelAnswer": [
+            "Yes. (Please tell me more.) I often watch baseball games with my father.",
+            "No. (What do you like to watch on TV?) I like to watch music programs."
+          ]
+        }
+      ]
+    },
+    {
+      "setId": "grade3-03",
+      "title": "Camping",
+      "passage": "Camping is popular in Japan. People can cook outside and look at beautiful stars at night. Many campsites lend tents to visitors, so people can go camping without their own tents.",
+      "pictureA": "images/grade3/grade3-03.jpg",
+      "reading": { "prepSeconds": 20, "answerSeconds": 45 },
+      "questions": [
+        {
+          "no": 1,
+          "type": "passage",
+          "prompt": "Please look at the passage. Why can people go camping without their own tents?",
+          "prepSeconds": 0,
+          "answerSeconds": 25,
+          "modelAnswer": ["Because many campsites lend tents to visitors."]
+        },
+        {
+          "no": 2,
+          "type": "picture",
+          "prompt": "Please look at the picture. What is the man doing?",
+          "prepSeconds": 0,
+          "answerSeconds": 20,
+          "modelAnswer": ["He's cooking meat."],
+          "extraCheckPoints": ["is ＋ -ing の形で答えているか", "cooking だけでも、cooking meat / having a barbecue でもよい"]
+        },
+        {
+          "no": 3,
+          "type": "picture",
+          "prompt": "Please look at the girl. What is she going to do?",
+          "prepSeconds": 0,
+          "answerSeconds": 20,
+          "modelAnswer": ["She's going to catch a fish."],
+          "extraCheckPoints": ["be going to ＋ 動詞の原形で答えているか", "catch a fish / fish / go fishing はどれも正解とする"]
+        },
+        {
+          "no": 4,
+          "type": "self",
+          "prompt": "What do you like to do in summer?",
+          "prepSeconds": 0,
+          "answerSeconds": 20,
+          "modelAnswer": ["I like to swim in the sea."]
+        },
+        {
+          "no": 5,
+          "type": "personal",
+          "prompt": "Have you ever cooked dinner for your family?",
+          "noFollowUp": "What would you like to cook in the future?",
+          "prepSeconds": 0,
+          "answerSeconds": 20,
+          "modelAnswer": [
+            "Yes. (Please tell me more.) I made curry and rice for my family last Sunday.",
+            "No. (What would you like to cook in the future?) I'd like to cook spaghetti."
+          ]
+        }
+      ]
+    },
+    {
+      "setId": "grade3-04",
+      "title": "Making Sweets",
+      "passage": "Many young people enjoy making sweets at home. They often find easy recipes on the Internet. Homemade cookies and cakes make good presents, so people often give them to their friends.",
+      "pictureA": "images/grade3/grade3-04.jpg",
+      "reading": { "prepSeconds": 20, "answerSeconds": 45 },
+      "questions": [
+        {
+          "no": 1,
+          "type": "passage",
+          "prompt": "Please look at the passage. Why do people often give homemade cookies and cakes to their friends?",
+          "prepSeconds": 0,
+          "answerSeconds": 25,
+          "modelAnswer": ["Because they make good presents."]
+        },
+        {
+          "no": 2,
+          "type": "picture",
+          "prompt": "Please look at the picture. How many eggs are there on the table?",
+          "prepSeconds": 0,
+          "answerSeconds": 20,
+          "modelAnswer": ["There are three eggs."],
+          "extraCheckPoints": ["There are ＋ 数 の形で答えているか"]
+        },
+        {
+          "no": 3,
+          "type": "picture",
+          "prompt": "Please look at the boy. What is he doing?",
+          "prepSeconds": 0,
+          "answerSeconds": 20,
+          "modelAnswer": ["He's washing the dishes."],
+          "extraCheckPoints": ["is ＋ -ing の形で答えているか"]
+        },
+        {
+          "no": 4,
+          "type": "self",
+          "prompt": "What did you do last Sunday?",
+          "prepSeconds": 0,
+          "answerSeconds": 20,
+          "modelAnswer": ["I went shopping with my sister."]
+        },
+        {
+          "no": 5,
+          "type": "personal",
+          "prompt": "Do you like to cook?",
+          "noFollowUp": "What do you like to do at home?",
+          "prepSeconds": 0,
+          "answerSeconds": 20,
+          "modelAnswer": [
+            "Yes. (Please tell me more.) I often make pancakes on weekends.",
+            "No. (What do you like to do at home?) I like to play video games."
+          ]
+        }
+      ]
+    },
+    {
+      "setId": "grade3-05",
+      "title": "Visiting Aquariums",
+      "passage": "Aquariums are popular places for families. Visitors can see many kinds of sea animals there. Some aquariums have exciting shows with dolphins and sea lions, so children can enjoy watching them.",
+      "pictureA": "images/grade3/grade3-05.jpg",
+      "reading": { "prepSeconds": 20, "answerSeconds": 45 },
+      "questions": [
+        {
+          "no": 1,
+          "type": "passage",
+          "prompt": "Please look at the passage. Why can children enjoy watching shows at some aquariums?",
+          "prepSeconds": 0,
+          "answerSeconds": 25,
+          "modelAnswer": ["Because some aquariums have exciting shows with dolphins and sea lions."]
+        },
+        {
+          "no": 2,
+          "type": "picture",
+          "prompt": "Please look at the picture. Where is the turtle?",
+          "prepSeconds": 0,
+          "answerSeconds": 20,
+          "modelAnswer": ["It's on the rock."],
+          "extraCheckPoints": ["It's ＋ 場所を表す語句の形で答えているか", "on the rock が基本。in the water / in the tank も絵と合っていれば認める"]
+        },
+        {
+          "no": 3,
+          "type": "picture",
+          "prompt": "Please look at the boy. What is he going to do?",
+          "prepSeconds": 0,
+          "answerSeconds": 20,
+          "modelAnswer": ["He's going to eat ice cream."],
+          "extraCheckPoints": ["be going to ＋ 動詞の原形で答えているか"]
+        },
+        {
+          "no": 4,
+          "type": "self",
+          "prompt": "Where would you like to go next summer?",
+          "prepSeconds": 0,
+          "answerSeconds": 20,
+          "modelAnswer": ["I'd like to go to Okinawa."]
+        },
+        {
+          "no": 5,
+          "type": "personal",
+          "prompt": "Do you have any pets?",
+          "noFollowUp": "What animal would you like to have?",
+          "prepSeconds": 0,
+          "answerSeconds": 20,
+          "modelAnswer": [
+            "Yes. (Please tell me more.) I have a cat. Her name is Momo.",
+            "No. (What animal would you like to have?) I'd like to have a dog."
+          ]
+        }
+      ]
+    }
+  ]
+}

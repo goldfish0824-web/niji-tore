@@ -386,7 +386,8 @@ function buildRequest(data, set, clips, choices) {
       `【見るべき点】\n${bullets(points)}`
     );
     if (hasFollowUp(q)) {
-      const followUp = choices[q.no] === "no" ? L.noFollowUp : L.yesFollowUp;
+      // 3級は No のときの質問が問題ごとに違う
+      const followUp = choices[q.no] === "no" ? q.noFollowUp || L.noFollowUp : q.yesFollowUp || L.yesFollowUp;
       audio(`${id}a`, "【生徒の解答（Yes / No）】");
       text(`【面接官の追加質問】${followUp}`);
       audio(`${id}b`, "【生徒の解答（追加質問への答え）】");

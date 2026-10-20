@@ -13,7 +13,7 @@
 | `checkPoints` | 質問の type ごとの講評の観点。全セット共通 |
 | `sets` | セットの配列 |
 
-`interviewerLines.q3` の `{subject}` は、そのセットの `questions[].subject`（`man` / `woman`）に置き換える。`start` と `end` は面接の最初と最後に読み上げるセリフ。2級の `q2` は3コマの説明の指示、`begin` は考える時間のあとの "Please begin."。`yesFollowUp` / `noFollowUp` は級ごとに違う（準2級は Please tell me more. / Why not?、2級は Why? / Why not?）。
+`interviewerLines.q3` の `{subject}` は、そのセットの `questions[].subject`（`man` / `woman`）に置き換える。`start` と `end` は面接の最初と最後に読み上げるセリフ。2級の `q2` は3コマの説明の指示、`begin` は考える時間のあとの "Please begin."。`yesFollowUp` / `noFollowUp` は級ごとに違う（準2級は Please tell me more. / Why not?、2級は Why? / Why not?）。3級は No のときの質問が問題ごとに違うので、`questions[].noFollowUp` に書く。
 
 ## セット
 
@@ -21,20 +21,21 @@
 | --- | --- |
 | `setId` | `pre2-01` のような一意のID |
 | `title` | カードのタイトル。音読はここから始める |
-| `passage` | 本文。準2級は約50語、2級は約60語 |
-| `pictureA` / `pictureB` | 準2級のイラスト。リポジトリルートからの相対パス |
+| `passage` | 本文。3級は約30語、準2級は約50語、2級は約60語 |
+| `pictureA` / `pictureB` | 準2級のイラスト（3級は `pictureA` の1枚だけ）。リポジトリルートからの相対パス |
 | `story` | 2級の3コマ漫画。下を参照 |
 | `reading` | 音読の `prepSeconds`（黙読）と `answerSeconds` |
-| `questions` | 準2級は No.1〜5、2級は No.1〜4 |
+| `questions` | 3級・準2級は No.1〜5、2級は No.1〜4 |
 
 ## 質問
 
 | キー | 内容 |
 | --- | --- |
 | `no` | 1〜5 |
-| `type` | `passage` / `pictureA` / `pictureB` / `story` / `opinion` / `personal` |
+| `type` | `passage` / `pictureA` / `pictureB` / `story` / `picture`（3級のイラストの質問）/ `opinion` / `self`（3級 No.4 の自分のことを聞く質問）/ `personal`（Yes / No のあとに追加の質問） |
 | `prompt` | 面接官が読み上げる質問文。`pictureA` / `pictureB` / `story` は `interviewerLines` を使うので `null` |
 | `subject` | `pictureB` のときだけ。`man` または `woman` |
+| `noFollowUp` / `yesFollowUp` | `personal` のとき、`interviewerLines` の追加の質問の代わりに使う。任意 |
 | `prepSeconds` | 考える時間。0なら即答 |
 | `answerSeconds` | 解答時間の上限 |
 | `modelAnswer` | 解答例の配列。`pictureA` と `story` は1文ずつ並べる。`opinion` と `personal` は別解を並べる（agree / disagree、Yes / No） |

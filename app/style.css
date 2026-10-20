@@ -255,6 +255,9 @@ input[type="password"]:focus { outline: 2px solid var(--accent); border-color: t
 @media (min-width: 700px) {
   .pictures { grid-template-columns: 1fr 1fr; }
 }
+/* 3級はイラスト1枚。ラベル（A / B）は付けない */
+.pictures.single { grid-template-columns: 1fr; max-width: 640px; margin: 0 auto; }
+.pictures.single figcaption { display: none; }
 
 /* 2級の3コマ漫画。スマホでは縦に、広い画面では本物のカードと同じく横に並べる */
 .story-lead { font-family: var(--serif); font-size: 1.02rem; line-height: 1.6; margin: 0 0 14px; padding: 0 8px; }

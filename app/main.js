@@ -16,6 +16,8 @@ const CONTINUE = "__continue";
 const VOICE_RMS = 0.015; // これより大きい音を声として数える
 const SPEAK_WARNING_MS = 1500; // 録音していない区間でこれだけ声がしたら注意を出す
 const SHORT_ANSWER_MS = 1500; // 録音中の声がこれ未満で「答え終わった」を押したら確かめる
+// カードを裏返したあとに答える質問（準2級・3級は No.4 から、2級は No.3 から）
+const CARD_OFF_TYPES = new Set(["opinion", "personal", "self"]);
 const YES_NO = [
   { label: "Yes と答えた", value: "yes", kind: "primary" },
   { label: "No と答えた", value: "no", kind: "primary" },
@@ -189,7 +191,7 @@ function renderSetList() {
 function renderFlow() {
   const first = state.data.sets[0];
   const qs = first.questions;
-  const turn = qs.findIndex((q) => q.type === "opinion" || q.type === "personal");
+  const turn = qs.findIndex((q) => CARD_OFF_TYPES.has(q.type));
   const range = (list) =>
     list.length > 2 ? `No.${list[0].no}〜No.${list.at(-1).no}` : list.map((q) => `No.${q.no}`).join("・");
   const story = qs.find((q) => q.type === "story");
@@ -289,7 +291,7 @@ async function runInterview(signal) {
   for (const q of set.questions) {
     const id = `q${q.no}`;
     const question = questionLine(q);
-    if (!turned && (q.type === "opinion" || q.type === "personal")) {
+    if (!turned && CARD_OFF_TYPES.has(q.type)) {
       await say(L.turnOver);
       showCard("back");
       turned = true;
@@ -315,7 +317,7 @@ async function runInterview(signal) {
         label: `No.${q.no} まず Yes / No`,
         seconds: Math.min(20, q.answerSeconds),
         repeat: question,
-        hint: "Yes か No だけを言ってから、言ったほうのボタンを押してください。理由はこのあと聞かれます。",
+        hint: "Yes か No だけを言ってから、言ったほうのボタンを押してください。続きはこのあと聞かれます。",
         choices: YES_NO,
       });
       let choice = first.choice;
@@ -324,7 +326,7 @@ async function runInterview(signal) {
       }
       state.clips[`${id}a`] = first.clip;
       state.choices[q.no] = choice;
-      const followUp = choice === "no" ? L.noFollowUp : L.yesFollowUp;
+      const followUp = followUpLine(q, choice);
       await say(followUp);
       state.clips[`${id}b`] = (await recordAnswer(signal, { label: `No.${q.no}`, seconds: q.answerSeconds, repeat: followUp })).clip;
     } else {
@@ -456,6 +458,12 @@ function phase(signal, { label, seconds, hint = "", repeat = null, choices = nul
   });
 }
 
+/** Yes / No のあとの追加の質問。3級は No のときの質問が問題ごとに違う。 */
+function followUpLine(q, choice) {
+  const L = state.data.interviewerLines;
+  return choice === "no" ? q.noFollowUp || L.noFollowUp : q.yesFollowUp || L.yesFollowUp;
+}
+
 function questionLine(q) {
   if (q.prompt) return q.prompt;
   const L = state.data.interviewerLines;
@@ -585,15 +593,18 @@ function fillCard() {
   const { set } = state;
   $("#card-title").textContent = set.title;
   $("#card-passage").textContent = set.passage;
-  // 準2級はイラスト2枚、2級は3コマ漫画
+  // 準2級はイラスト2枚、2級は3コマ漫画、3級はイラスト1枚
   $("#pictures").hidden = Boolean(set.story);
   $("#story").hidden = !set.story;
   if (set.story) {
     renderStory(set.story);
-  } else {
-    $("#pic-a").src = asset(set.pictureA);
-    $("#pic-b").src = asset(set.pictureB);
+    return;
   }
+  $("#pic-a").src = asset(set.pictureA);
+  const single = !set.pictureB;
+  $("#pictures").classList.toggle("single", single);
+  $("#fig-b").hidden = single;
+  if (!single) $("#pic-b").src = asset(set.pictureB);
 }
 
 /** 3コマと、コマの間の矢印の語句、1コマ目のせりふ。画像には文字がないので、ここで重ねる。 */
@@ -623,7 +634,7 @@ function showCard(side) {
 }
 
 function focusCard(type) {
-  const target = { passage: "#card-passage", pictureA: "#fig-a", pictureB: "#fig-b", story: "#story" }[type];
+  const target = { passage: "#card-passage", pictureA: "#fig-a", pictureB: "#fig-b", picture: "#fig-a", story: "#story" }[type];
   for (const el of document.querySelectorAll(".card .focus")) el.classList.remove("focus");
   if (!target) return;
   const el = $(target);
@@ -741,7 +752,6 @@ async function requestFeedback() {
 function renderFeedback(items, overall = null) {
   const { set } = state;
   const byId = new Map((items || []).map((it) => [it.id, it]));
-  const L = state.data.interviewerLines;
 
   const list = [
     feedbackItem({
@@ -754,9 +764,9 @@ function renderFeedback(items, overall = null) {
   ];
   for (const q of set.questions) {
     const id = `q${q.no}`;
-    const followUp = state.choices[q.no] === "no" ? L.noFollowUp : L.yesFollowUp;
+    const followUp = followUpLine(q, state.choices[q.no]);
     const pictures =
-      q.type === "pictureA" ? [set.pictureA]
+      q.type === "pictureA" || q.type === "picture" ? [set.pictureA]
       : q.type === "pictureB" ? [set.pictureB]
       : q.type === "story" ? set.story.panels.map((p) => p.image)
       : null;
