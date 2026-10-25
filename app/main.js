@@ -17,7 +17,7 @@ const REPEAT = "__repeat";
 const CONTINUE = "__continue";
 const VOICE_RMS = 0.015; // これより大きい音を声として数える
 const SPEAK_WARNING_MS = 1500; // 録音していない区間でこれだけ声がしたら注意を出す
-const SHORT_ANSWER_MS = 1500; // 録音中の声がこれ未満で「答え終わった」を押したら確かめる
+const SHORT_ANSWER_MS = 1500; // 録音中の声がこれ未満で「答え終わった」を押したら確かめる（級ごとに sets.json の shortAnswerMs で変えられる）
 // カードを裏返したあとに答える質問（準2級・3級は No.4 から、2級は No.3 から）
 const CARD_OFF_TYPES = new Set(["opinion", "personal", "self"]);
 const YES_NO = [
@@ -436,7 +436,7 @@ function phase(signal, { label, seconds, hint = "", repeat = null, choices = nul
         renderActions(actions);
         return;
       }
-      if (value === "done" && recording && !confirming && voice.ms < SHORT_ANSWER_MS) {
+      if (value === "done" && recording && !confirming && voice.ms < (state.data.shortAnswerMs ?? SHORT_ANSWER_MS)) {
         // 勘違いで押してしまったときに、録音が空のまま次へ進まないようにする
         confirming = true;
         setDockWarning("まだほとんど声が録音されていません。答え終わりましたか？");

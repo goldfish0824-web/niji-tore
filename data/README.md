@@ -11,6 +11,7 @@
 | `version` | データを更新した日付 |
 | `interviewerLines` | 面接官の定型セリフ。全セット共通 |
 | `checkPoints` | 質問の type ごとの講評の観点。全セット共通 |
+| `shortAnswerMs` | 任意。「答え終わった」を押したとき、録音中の声がこのミリ秒数より短ければ「答え終わりましたか？」と確かめる。省略時は1500。3級は答えが短いので50（声がまったく入っていないときだけ確かめる） |
 | `sets` | セットの配列 |
 
 `interviewerLines.q3` の `{subject}` は、そのセットの `questions[].subject`（`man` / `woman`）に置き換える。`start` と `end` は面接の最初と最後に読み上げるセリフ。2級の `q2` は3コマの説明の指示、`begin` は考える時間のあとの "Please begin."。`yesFollowUp` / `noFollowUp` は級ごとに違う（準2級は Please tell me more. / Why not?、2級は Why? / Why not?）。3級は No のときの質問が問題ごとに違うので、`questions[].noFollowUp` に書く。
