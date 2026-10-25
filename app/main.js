@@ -217,6 +217,15 @@ function markDone(setId) {
   if (!list.includes(setId)) storage.set(`${DONE_KEY}.${GRADE}`, JSON.stringify([...list, setId]));
 }
 
+/**
+ * 利用の集計（GoatCounter）。ページを開いた数は index.html の1行が数えるが、面接は画面を
+ * 読み込み直さずに進むので、終えた回数と講評をもらった回数はここで級・回ごとに数える。
+ */
+function countEvent(kind) {
+  const no = state.data.sets.indexOf(state.set) + 1;
+  window.goatcounter?.count?.({ path: `${kind}/${state.data.gradeLabel}/第${no}回`, title: state.set.title, event: true });
+}
+
 // ---------------------------------------------------------------------------
 // 面接
 
@@ -250,6 +259,7 @@ async function startInterview() {
     await runInterview(ctrl.signal);
     state.running = null;
     markDone(state.set.setId);
+    countEvent("面接を終えた");
     renderDone();
     celebrate();
   } catch (err) {
@@ -754,6 +764,7 @@ async function requestFeedback() {
   try {
     const res = await api("/api/feedback", form);
     state.remaining = res.remaining;
+    countEvent("AIの講評");
     renderFeedback(res.items, res.overall);
   } catch (err) {
     if (typeof err.payload?.remaining === "number") state.remaining = err.payload.remaining;
