@@ -67,7 +67,7 @@ npx wrangler deploy
 
 無音だった録音は送らない。Worker はその問題を「無音。答えていない」としてプロンプトに入れる。
 
-返すのは `{ items, limit, remaining }`。`items` は `reading`, `q1`〜`q5` の順で、各要素は `transcript`（書き起こし）、`good`、`fixes`（最大2つ）、`rewrite`、`unclear`（聞き取れなかった語）、`note`。点数や合否の欄はない。
+返すのは `{ items, overall, limit, remaining }`。`items` は `reading`, `q1`〜`q5` の順で、各要素は `transcript`（書き起こし）、`good`、`fixes`（最大2つ）、`rewrite`、`unclear`（聞き取れなかった語）、`note`。点数や合否の欄はない。
 
 ## 運用メモ
 

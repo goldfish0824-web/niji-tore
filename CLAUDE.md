@@ -36,7 +36,7 @@ worker/      Cloudflare Worker。worker.js 1ファイル。配置手順は worke
 | Worker | https://eiken-2ji.goldfish0824.workers.dev （Cloudflare の Worker 名 eiken-2ji、KV は eiken-2ji-usage） |
 
 - パスワードは全員共通で1つ。Worker のシークレット `PASSWORDS` に入っている。リポジトリは公開なので、パスワードやキーの値はどのファイルにも書かない。
-- `DAILY_LIMIT` は共通パスワードなので学校全体での1日の上限（今は200回）。
+- `DAILY_LIMIT` は共通パスワードなので学校全体での1日の上限（今は500回）。
 - Worker の更新は `worker/` で `npx.cmd wrangler deploy`。PowerShell では `npx` だと実行ポリシーで止まるので `npx.cmd` を使う。Node.js は 2026-10 に入れた。
 - アプリと問題データの更新は git で main に push する。Worker は問題データを GitHub Pages から読むので、sets.json を直したら push だけでよい。
 

@@ -6,7 +6,7 @@ compatibility_date = "2026-10-01"
 [vars]
 GEMINI_MODEL = "gemini-3.1-flash-lite"
 # パスワードは全員共通なので、学校全体での1日あたりの上限になる
-DAILY_LIMIT = "200"
+DAILY_LIMIT = "500"
 # GitHub Pages の公開URL（リポジトリのルート）。末尾の / まで書く
 DATA_BASE_URL = "https://goldfish0824-web.github.io/niji-tore/"
 # アプリを置くオリジン。カンマ区切りで複数可。localhost は手元での確認用

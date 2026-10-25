@@ -71,7 +71,7 @@ async function handleFeedback(request, env) {
   const limit = dailyLimit(env);
   const used = await readUsage(env, userKey);
   if (used >= limit) {
-    throw new HttpError(429, "limit", `今日の講評は${limit}回までです。明日また使えます。`, { limit, remaining: 0 });
+    throw new HttpError(429, "limit", "本日の全体の練習回数を超えました。また明日やってみてください。", { limit, remaining: 0 });
   }
 
   const maxBytes = Number(env.MAX_AUDIO_BYTES) || DEFAULT_MAX_AUDIO_BYTES;

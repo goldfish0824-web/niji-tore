@@ -11,6 +11,8 @@ const ROOT = new URL("../", location.href);
 const PASSWORD_KEY = "eiken2ji.password";
 const SHOW_TEXT_KEY = "eiken2ji.showText";
 const DONE_KEY = "eiken2ji.done";
+// 1日の講評の回数（パスワードが共通なので学校全体）を使い切ったときだけ出す。残りの回数は見せない
+const LIMIT_MESSAGE = "本日の全体の練習回数を超えました。また明日やってみてください。";
 const REPEAT = "__repeat";
 const CONTINUE = "__continue";
 const VOICE_RMS = 0.015; // これより大きい音を声として数える
@@ -32,7 +34,6 @@ const state = {
   data: null,
   set: null,
   password: "",
-  limit: null,
   remaining: null,
   clips: {}, // 録音の名前 → { blob, url, seconds, silent }
   choices: {}, // 問題番号 → "yes" | "no"
@@ -127,7 +128,6 @@ async function onLogin(e) {
   try {
     const res = await api("/api/check");
     storage.set(PASSWORD_KEY, pw);
-    state.limit = res.limit;
     state.remaining = res.remaining;
     backToReady();
   } catch (err) {
@@ -140,7 +140,7 @@ async function onLogin(e) {
 function backToReady() {
   resetSession();
   renderSetList();
-  renderRemaining($("#ready-remaining"));
+  renderLimitNote($("#ready-limit"), "AIの講評なしで練習することはできます。");
   $("#btn-logout").hidden = !WORKER_URL;
   show("ready");
 }
@@ -734,7 +734,7 @@ function renderDone() {
   $("#done-warning").textContent =
     voiced === 0 ? "声が録音されていませんでした。マイクの設定を確かめてから、もう一度練習してください。" : "";
   if (ai) {
-    renderRemaining($("#done-remaining"));
+    renderLimitNote($("#done-limit"));
     $("#btn-feedback").disabled = voiced === 0 || state.remaining === 0;
   }
   show("done");
@@ -753,13 +753,13 @@ async function requestFeedback() {
   const stopSteps = startLoadingSteps();
   try {
     const res = await api("/api/feedback", form);
-    state.limit = res.limit;
     state.remaining = res.remaining;
     renderFeedback(res.items, res.overall);
   } catch (err) {
     if (typeof err.payload?.remaining === "number") state.remaining = err.payload.remaining;
     renderDone();
-    $("#done-error").textContent = err.message;
+    // 回数を使い切ったときは renderDone が知らせるので、同じ文を重ねない
+    if (state.remaining !== 0) $("#done-error").textContent = err.message;
   } finally {
     stopSteps();
   }
@@ -843,7 +843,6 @@ function renderFeedback(items, overall = null) {
   $("#feedback-list").replaceChildren(...list);
   $("#feedback-ai-note").hidden = !items;
   $("#feedback-self-note").hidden = Boolean(items);
-  renderRemaining($("#feedback-remaining"));
   state.reviewed = true;
   show("feedback");
 }
@@ -912,8 +911,8 @@ function aiBlocks(ai) {
   return blocks;
 }
 
-function renderRemaining(el) {
-  el.textContent = WORKER_URL && state.remaining != null ? `今日はあと ${state.remaining} 回、AIの講評をもらえます。` : "";
+function renderLimitNote(el, extra = "") {
+  el.textContent = WORKER_URL && state.remaining === 0 ? LIMIT_MESSAGE + extra : "";
 }
 
 function resetSession() {
