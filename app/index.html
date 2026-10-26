@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700;800&display=swap">
   <link rel="stylesheet" href="style.css">
   <script type="module" src="main.js"></script>
+  <script src="inapp-warning.js" defer></script>
   <!-- 利用の集計（GoatCounter。Cookie を使わず、個人を特定する情報も集めない） -->
   <script data-goatcounter="https://nijitore.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </head>
@@ -73,6 +74,7 @@
     <ul class="tips">
       <li>面接官の声が出ます。音量を上げてください。</li>
       <li>マイクの使用を聞かれたら「許可」を押してください。</li>
+      <li>はじめての端末では、下の「マイクの確認」で録音できるか確かめておきましょう。</li>
       <li>「ピッ」と鳴ったら話し始めます。答え終わったらボタンを押してください。時間が来ると自動で次に進みます。</li>
     </ul>
     <label class="check">
@@ -85,6 +87,24 @@
   <p id="offline-note" class="note" hidden>いまは AI の講評なしで練習するモードです。終わったら自分の録音と解答例を見比べましょう。</p>
   <button id="btn-start" type="button" class="btn primary wide big">面接を始める</button>
   <p id="ready-error" class="error" role="alert"></p>
+
+  <!-- 面接の前に、面接官の声が聞こえるか・自分の声が録音できるかを確かめる -->
+  <button id="btn-mic-check" type="button" class="btn secondary wide">マイクの確認</button>
+  <div id="mic-check" class="panel mic-check" hidden>
+    <p id="mic-check-status" class="mic-check-status" role="status"></p>
+    <div id="mic-check-level" class="level" hidden><span>声の大きさ</span><div class="eq"><i style="--k: .55"></i><i style="--k: .8"></i><i style="--k: 1"></i><i style="--k: .9"></i><i style="--k: .7"></i><i style="--k: .95"></i><i style="--k: .6"></i></div></div>
+    <audio id="mic-check-audio" controls hidden></audio>
+    <div id="mic-check-help" hidden>
+      <h2>録音できないときは（上から順に）</h2>
+      <ol class="tips">
+        <li><strong>LINE や Instagram から開いていませんか。</strong>アプリの中の画面ではマイクが使えないことがあります。メニューから「Safariで開く」（Android は「Chromeで開く」）を選んでください。</li>
+        <li><strong>マイクの許可が「拒否」になっていませんか。</strong>iPhone はアドレスバーの「ぁA」→「Webサイトの設定」→「マイク」→「許可」。Android はアドレスバー左のアイコン →「権限」→「マイク」→「許可」。設定したらページを読み込み直してください。</li>
+        <li><strong>スクリーンタイムで制限されていませんか。</strong>「設定」→「スクリーンタイム」→「コンテンツとプライバシーの制限」→「マイク」が「変更を許可」になっているか確かめてください。</li>
+        <li><strong>ほかのアプリがマイクを使っていませんか。</strong>通話中や画面収録中は録音できません。それでもだめなときは、端末を再起動してください。</li>
+      </ol>
+    </div>
+  </div>
+
   <button id="btn-logout" type="button" class="btn link" hidden>パスワードを入れ直す</button>
 </section>
 

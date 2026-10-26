@@ -84,6 +84,7 @@ async function init() {
 function bindEvents() {
   $("#login-form").addEventListener("submit", onLogin);
   $("#btn-start").addEventListener("click", startInterview);
+  $("#btn-mic-check").addEventListener("click", micCheck);
   $("#opt-show-text").addEventListener("change", (e) => setShowText(e.target.checked));
   $("#btn-toggle-text").addEventListener("click", () => setShowText(!state.showText));
   $("#btn-quit").addEventListener("click", () => {
@@ -240,7 +241,7 @@ async function startInterview() {
     await opening;
   } catch (err) {
     recorder.close();
-    $("#ready-error").textContent = micErrorMessage(err);
+    $("#ready-error").textContent = `${micErrorMessage(err)} 下の「マイクの確認」を押すと、直し方が出ます。`;
     return;
   } finally {
     button.disabled = false;
@@ -272,6 +273,68 @@ async function startInterview() {
     recorder.close();
     wakeLock.release();
     speech.cancel();
+  }
+}
+
+// ---------------------------------------------------------------------------
+// マイクの確認。面接官の声を1つ流してから、数秒録音して聞き返せるようにする
+
+const MIC_CHECK_SECONDS = 4;
+
+async function micCheck() {
+  const button = $("#btn-mic-check");
+  const audio = $("#mic-check-audio");
+  // 面接と同じく、iPhone ではボタンを押した直後（await より前）に始める
+  speech.unlock();
+  const opening = recorder.open();
+  button.disabled = true;
+  $("#btn-start").disabled = true;
+  $("#mic-check").hidden = false;
+  $("#mic-check-help").hidden = true;
+  audio.hidden = true;
+  if (audio.src) URL.revokeObjectURL(audio.src);
+  audio.removeAttribute("src");
+  const status = (text, kind = "") => {
+    $("#mic-check-status").textContent = text;
+    $("#mic-check-status").className = `mic-check-status ${kind}`;
+  };
+  status("マイクを準備しています…");
+
+  try {
+    try {
+      await opening;
+    } catch (err) {
+      status(micErrorMessage(err), "ng");
+      $("#mic-check-help").hidden = false;
+      return;
+    }
+    status("面接官の声が聞こえますか？聞こえないときは音量を上げてください。");
+    await speak("Hello. Can you hear me? Please say something in English after the beep.", new AbortController().signal);
+
+    recorder.onlevel = (rms) => setLevel($("#mic-check-level"), rms);
+    $("#mic-check-level").hidden = false;
+    await recorder.beep();
+    recorder.start();
+    for (let left = MIC_CHECK_SECONDS; left > 0; left--) {
+      status(`録音中… あと ${left} 秒　英語で何か言ってみましょう（例：Hello. My name is ….）`, "rec");
+      await new Promise((r) => setTimeout(r, 1000));
+    }
+    const clip = await recorder.stop();
+    $("#mic-check-level").hidden = true;
+    audio.src = URL.createObjectURL(clip.blob);
+    audio.hidden = false;
+    if (clip.silent) {
+      status("声が録音されていませんでした。マイクの穴を指でふさいでいないか確かめて、もう一度押してください。", "ng");
+      $("#mic-check-help").hidden = false;
+    } else {
+      status("録音できています！ ▶ で自分の声を聞いてみましょう。", "ok");
+    }
+  } finally {
+    recorder.onlevel = null;
+    recorder.close();
+    speech.cancel();
+    button.disabled = false;
+    $("#btn-start").disabled = false;
   }
 }
 
@@ -727,9 +790,13 @@ function renderTime(remainingMs, totalMs) {
 function renderLevel(rms) {
   // 音量は 1/20 秒ごとに届く
   if (voice.counting && rms >= VOICE_RMS) voice.ms += 50;
+  setLevel($("#level"), rms);
+}
+
+function setLevel(el, rms) {
   const db = 20 * Math.log10(rms + 1e-8);
   const pct = Math.max(0, Math.min(1, (db + 60) / 50));
-  $("#level").style.setProperty("--lvl", pct.toFixed(2));
+  el.style.setProperty("--lvl", pct.toFixed(2));
 }
 
 // ---------------------------------------------------------------------------

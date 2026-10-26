@@ -646,6 +646,36 @@ body:not([data-screen="interview"]) {
 
 .change-grade { font-size: 0.85rem; font-weight: 700; color: var(--accent); margin-left: 6px; }
 
+/* LINE などのアプリの中で開いたときの注意（inapp-warning.js が出す） */
+.inapp-warning {
+  position: relative;
+  z-index: 2;
+  width: calc(100% - 32px);
+  max-width: 528px;
+  margin: max(12px, env(safe-area-inset-top)) auto 0;
+  padding: 12px 16px;
+  border: 2px solid #f5b400;
+  border-radius: var(--radius);
+  background: #fff6db;
+  font-family: var(--pop);
+  font-size: 0.95rem;
+}
+.inapp-warning p { margin: 4px 0 10px; }
+.inapp-warning p:last-child { margin-bottom: 0; }
+.inapp-warning .btn { display: inline-block; min-height: 0; text-decoration: none; }
+body[data-screen="interview"] .inapp-warning { display: none; }
+
+/* マイクの確認 */
+.mic-check { margin-top: 8px; }
+.mic-check-status { margin: 0; font-weight: 700; }
+.mic-check-status.rec { color: var(--rec); }
+.mic-check-status.ok { color: var(--good); }
+.mic-check-status.ng { color: var(--rec); }
+.mic-check .level { margin-top: 10px; font-size: 0.85rem; }
+.mic-check audio { display: block; width: 100%; margin-top: 12px; }
+.mic-check h2 { font-size: 1rem; margin: 16px 0 6px; }
+.mic-check .tips li { margin: 8px 0; font-size: 0.92rem; }
+
 /* トップページの級ボタン（ルートの index.html） */
 .grade-list { display: grid; gap: 14px; }
 .grade-item {

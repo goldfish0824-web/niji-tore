@@ -20,6 +20,7 @@ images/      イラスト。級ごとのフォルダ。_incoming は未リネー
 scripts/     rename_images.py（_incoming の画像を正式名に変える）
 app/         フロントエンド。ビルドなしの ES モジュール（main.js が画面の流れ、recorder.js が録音）
 worker/      Cloudflare Worker。worker.js 1ファイル。配置手順は worker/README.md
+print/       生徒に配るプリント（Word）。git には入れない
 ```
 
 画面は端末のダークモードに関係なく、明るい表示に固定している（作者の希望。パソコンと同じ見た目にするため）。
