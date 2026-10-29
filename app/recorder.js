@@ -6,6 +6,10 @@ const SPEECH_RMS = 0.01; // これより大きい音を「声」とみなす（�
 const MIN_SPEECH_MS = 200; // 声とみなす音がこれ未満なら無音扱い
 const PAD_BEFORE_S = 0.4;
 const PAD_AFTER_S = 0.6;
+// Android の Chrome はエコー除去つきでマイクを開くと端末を通話モードにし、その間の読み上げが
+// 電話の音質になって割れることがある（Pixel で報告あり）。面接官が話している間は録音しないので
+// エコー除去はなくても困らない。iPhone は問題が出ていないので今のまま
+const ECHO_CANCELLATION = !/Android/i.test(navigator.userAgent);
 
 export class Recorder {
   constructor() {
@@ -25,7 +29,7 @@ export class Recorder {
     const resumed = ctx.resume();
 
     this.stream = await navigator.mediaDevices.getUserMedia({
-      audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true },
+      audio: { echoCancellation: ECHO_CANCELLATION, noiseSuppression: true, autoGainControl: true },
     });
     await resumed;
     await ctx.audioWorklet.addModule(new URL("./recorder-worklet.js", import.meta.url).href);
