@@ -60,6 +60,8 @@ async function init() {
     fatal("問題データを読み込めませんでした。ページを開き直してください。");
     return;
   }
+  // 画像がまだない回（"draft": true）は生徒に見せない。作者が確かめるときは &draft=1 をつける
+  if (params.get("draft") !== "1") state.data.sets = state.data.sets.filter((s) => !s.draft);
   document.title = `ニジトレ - ${state.data.gradeLabel}`;
   for (const el of document.querySelectorAll("[data-grade-label]")) el.textContent = state.data.gradeLabel;
 

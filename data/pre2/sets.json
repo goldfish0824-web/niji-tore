@@ -1,7 +1,7 @@
 {
   "grade": "pre2",
   "gradeLabel": "英検準2級",
-  "version": "2026-10-11",
+  "version": "2026-11-05",
   "interviewerLines": {
     "start": "Let's start the test. Here's your card.",
     "silentReading":"First, please read the passage silently for 20 seconds.",
@@ -337,6 +337,331 @@
           "prepSeconds": 0,
           "answerSeconds": 40,
           "modelAnswer": ["Yes. I read English comments on video sites. Sometimes I write short replies in English, too."]
+        }
+      ]
+    },
+    {
+      "setId": "pre2-06",
+      "draft": true,
+      "title": "Secondhand Clothes",
+      "passage": "Many young people like fashion, but new clothes are often expensive. These days, some stores buy used clothes and sell them at low prices. Many students shop at such stores. In this way, they can enjoy fashion without spending much money. These stores are also good for the environment.",
+      "pictureA": "images/pre2/pre2-06-a.jpg",
+      "pictureB": "images/pre2/pre2-06-b.jpg",
+      "reading": { "prepSeconds": 20, "answerSeconds": 60 },
+      "questions": [
+        {
+          "no": 1,
+          "type": "passage",
+          "prompt": "According to the passage, how can many students enjoy fashion without spending much money?",
+          "prepSeconds": 0,
+          "answerSeconds": 30,
+          "modelAnswer": ["By shopping at stores that sell used clothes at low prices."]
+        },
+        {
+          "no": 2,
+          "type": "pictureA",
+          "prompt": null,
+          "prepSeconds": 0,
+          "answerSeconds": 60,
+          "modelAnswer": [
+            "A woman is looking in the mirror.",
+            "A man is folding T-shirts.",
+            "A girl is trying on a hat.",
+            "A boy is tying his shoes.",
+            "A woman is carrying shopping bags."
+          ],
+          "extraCheckPoints": ["trying on / putting on a hat はどちらも正解とする", "tying his shoes / tying his shoelaces はどちらも正解とする"]
+        },
+        {
+          "no": 3,
+          "type": "pictureB",
+          "subject": "man",
+          "prompt": null,
+          "prepSeconds": 0,
+          "answerSeconds": 30,
+          "modelAnswer": ["He wants to buy the jacket, but it is too small for him."]
+        },
+        {
+          "no": 4,
+          "type": "opinion",
+          "prompt": "Some people say that young people spend too much money on clothes. What do you think about that?",
+          "prepSeconds": 0,
+          "answerSeconds": 40,
+          "modelAnswer": [
+            "I agree. Many young people buy new clothes every season. They should save money for more important things.",
+            "I disagree. Many young people buy cheap clothes at secondhand stores. They are careful about how they use their money."
+          ]
+        },
+        {
+          "no": 5,
+          "type": "personal",
+          "prompt": "Today, many people buy things on the Internet. Do you often shop online?",
+          "prepSeconds": 0,
+          "answerSeconds": 40,
+          "modelAnswer": [
+            "Yes. (Please tell me more.) I often buy books and clothes online. It is easy to compare prices on the Internet.",
+            "No. (Why not?) I like to see things with my own eyes before I buy them. I usually go shopping with my friends."
+          ]
+        }
+      ]
+    },
+    {
+      "setId": "pre2-07",
+      "draft": true,
+      "title": "Exercise Machines in Parks",
+      "passage": "Many people want to stay healthy, but going to a gym can be expensive. Now, some cities have put simple exercise machines in parks. Local people can use these machines for free. By doing so, they can exercise every day without spending money. Such parks are popular with elderly people.",
+      "pictureA": "images/pre2/pre2-07-a.jpg",
+      "pictureB": "images/pre2/pre2-07-b.jpg",
+      "reading": { "prepSeconds": 20, "answerSeconds": 60 },
+      "questions": [
+        {
+          "no": 1,
+          "type": "passage",
+          "prompt": "According to the passage, how can local people exercise every day without spending money?",
+          "prepSeconds": 0,
+          "answerSeconds": 30,
+          "modelAnswer": ["By using simple exercise machines in parks for free."]
+        },
+        {
+          "no": 2,
+          "type": "pictureA",
+          "prompt": null,
+          "prepSeconds": 0,
+          "answerSeconds": 60,
+          "modelAnswer": [
+            "A man is jogging.",
+            "A woman is walking a dog.",
+            "A boy is kicking a ball.",
+            "A girl is drinking water.",
+            "A woman is stretching."
+          ],
+          "extraCheckPoints": ["jogging / running はどちらも正解とする", "stretching / doing exercises はどちらも正解とする"]
+        },
+        {
+          "no": 3,
+          "type": "pictureB",
+          "subject": "woman",
+          "prompt": null,
+          "prepSeconds": 0,
+          "answerSeconds": 30,
+          "modelAnswer": ["She wants to play tennis, but it is raining."]
+        },
+        {
+          "no": 4,
+          "type": "opinion",
+          "prompt": "Some people say that schools should have more P.E. classes. What do you think about that?",
+          "prepSeconds": 0,
+          "answerSeconds": 40,
+          "modelAnswer": [
+            "I agree. Many students do not get enough exercise these days. P.E. classes are also a good way to relieve stress.",
+            "I disagree. Students need more time to study other subjects. They can exercise in club activities after school."
+          ]
+        },
+        {
+          "no": 5,
+          "type": "personal",
+          "prompt": "Today, many people exercise to stay healthy. Do you do any exercise outside school?",
+          "prepSeconds": 0,
+          "answerSeconds": 40,
+          "modelAnswer": [
+            "Yes. (Please tell me more.) I go jogging near my house every morning. It helps me feel refreshed before school.",
+            "No. (Why not?) I am too busy with homework and club activities. I get enough exercise at school."
+          ]
+        }
+      ]
+    },
+    {
+      "setId": "pre2-08",
+      "draft": true,
+      "title": "Paying with Smartphones",
+      "passage": "In Japan, more and more people are paying without cash. At many shops, customers can pay just by holding their smartphones over a small machine. In this way, they can pay quickly without carrying coins. However, some people still feel safer using cash, especially elderly people.",
+      "pictureA": "images/pre2/pre2-08-a.jpg",
+      "pictureB": "images/pre2/pre2-08-b.jpg",
+      "reading": { "prepSeconds": 20, "answerSeconds": 60 },
+      "questions": [
+        {
+          "no": 1,
+          "type": "passage",
+          "prompt": "According to the passage, how can customers pay quickly without carrying coins?",
+          "prepSeconds": 0,
+          "answerSeconds": 30,
+          "modelAnswer": ["By holding their smartphones over a small machine."]
+        },
+        {
+          "no": 2,
+          "type": "pictureA",
+          "prompt": null,
+          "prepSeconds": 0,
+          "answerSeconds": 60,
+          "modelAnswer": [
+            "A man is carrying a tray.",
+            "A woman is paying with her smartphone.",
+            "A girl is drinking juice.",
+            "A boy is eating noodles.",
+            "A man is cleaning the floor."
+          ],
+          "extraCheckPoints": ["paying with her smartphone が出てこなければ using her smartphone でもよい", "cleaning / mopping the floor はどちらも正解とする"]
+        },
+        {
+          "no": 3,
+          "type": "pictureB",
+          "subject": "woman",
+          "prompt": null,
+          "prepSeconds": 0,
+          "answerSeconds": 30,
+          "modelAnswer": ["She wants to pay with her smartphone, but its battery is dead."]
+        },
+        {
+          "no": 4,
+          "type": "opinion",
+          "prompt": "Some people say that children should learn how to use money wisely at school. What do you think about that?",
+          "prepSeconds": 0,
+          "answerSeconds": 40,
+          "modelAnswer": [
+            "I agree. Many young people pay with smartphones, so they do not notice how much they spend. Learning about money at school will help them in the future.",
+            "I disagree. Children can learn about money from their parents at home. Schools should spend more time on other subjects."
+          ]
+        },
+        {
+          "no": 5,
+          "type": "personal",
+          "prompt": "Today, many people go to shopping malls on weekends. Do you often go to shopping malls?",
+          "prepSeconds": 0,
+          "answerSeconds": 40,
+          "modelAnswer": [
+            "Yes. (Please tell me more.) I often go to a shopping mall near the station with my friends. We enjoy eating at the food court.",
+            "No. (Why not?) Shopping malls are always crowded on weekends. I prefer to stay home and relax."
+          ]
+        }
+      ]
+    },
+    {
+      "setId": "pre2-09",
+      "draft": true,
+      "title": "Delivery Boxes",
+      "passage": "Online shopping has become popular, and delivery workers are busier than before. Now, many apartment buildings have delivery boxes near their entrances. Workers can leave packages in these boxes when people are not at home. By doing so, workers can save time. People can also get their packages anytime.",
+      "pictureA": "images/pre2/pre2-09-a.jpg",
+      "pictureB": "images/pre2/pre2-09-b.jpg",
+      "reading": { "prepSeconds": 20, "answerSeconds": 60 },
+      "questions": [
+        {
+          "no": 1,
+          "type": "passage",
+          "prompt": "According to the passage, how can delivery workers save time?",
+          "prepSeconds": 0,
+          "answerSeconds": 30,
+          "modelAnswer": ["By leaving packages in delivery boxes when people are not at home."]
+        },
+        {
+          "no": 2,
+          "type": "pictureA",
+          "prompt": null,
+          "prepSeconds": 0,
+          "answerSeconds": 60,
+          "modelAnswer": [
+            "A woman is washing a car.",
+            "A man is carrying a box.",
+            "A girl is jumping rope.",
+            "A boy is riding a skateboard.",
+            "A man is taking out the garbage."
+          ],
+          "extraCheckPoints": ["配達員は a man / a delivery worker のどちらで言ってもよい", "taking out the garbage / putting a garbage bag ... はどちらも正解とする"]
+        },
+        {
+          "no": 3,
+          "type": "pictureB",
+          "subject": "man",
+          "prompt": null,
+          "prepSeconds": 0,
+          "answerSeconds": 30,
+          "modelAnswer": ["The box is too heavy, so he can't carry it."]
+        },
+        {
+          "no": 4,
+          "type": "opinion",
+          "prompt": "Some people say that shopping online is better than shopping at stores. What do you think about that?",
+          "prepSeconds": 0,
+          "answerSeconds": 40,
+          "modelAnswer": [
+            "I agree. People can shop online at any time of day. They do not have to carry heavy things home.",
+            "I disagree. At stores, people can see and touch things before they buy them. They can also ask store staff for advice."
+          ]
+        },
+        {
+          "no": 5,
+          "type": "personal",
+          "prompt": "Today, many people live in apartments in big cities. Would you like to live in a big city in the future?",
+          "prepSeconds": 0,
+          "answerSeconds": 40,
+          "modelAnswer": [
+            "Yes. (Please tell me more.) There are many shops and restaurants in big cities. I also think it is easy to find a good job there.",
+            "No. (Why not?) Big cities are too crowded and noisy for me. I want to live in a quiet place with a lot of nature."
+          ]
+        }
+      ]
+    },
+    {
+      "setId": "pre2-10",
+      "draft": true,
+      "title": "Community Buses",
+      "passage": "In some areas of Japan, there are not many trains or buses. This is a problem for elderly people who cannot drive. Now, some towns run small buses that stop near people's homes. In this way, elderly people can go shopping and visit hospitals easily. Such buses are becoming more common.",
+      "pictureA": "images/pre2/pre2-10-a.jpg",
+      "pictureB": "images/pre2/pre2-10-b.jpg",
+      "reading": { "prepSeconds": 20, "answerSeconds": 60 },
+      "questions": [
+        {
+          "no": 1,
+          "type": "passage",
+          "prompt": "According to the passage, how can elderly people go shopping and visit hospitals easily?",
+          "prepSeconds": 0,
+          "answerSeconds": 30,
+          "modelAnswer": ["By taking small buses that stop near their homes."]
+        },
+        {
+          "no": 2,
+          "type": "pictureA",
+          "prompt": null,
+          "prepSeconds": 0,
+          "answerSeconds": 60,
+          "modelAnswer": [
+            "A woman is getting off the bus.",
+            "A man is carrying a bag of rice.",
+            "A girl is waving her hand.",
+            "A boy is picking up a cap.",
+            "A woman is putting a letter into the mailbox."
+          ],
+          "extraCheckPoints": ["米の袋は a bag / a sack のどちらでもよい", "putting a letter into the mailbox / mailing a letter はどちらも正解とする"]
+        },
+        {
+          "no": 3,
+          "type": "pictureB",
+          "subject": "woman",
+          "prompt": null,
+          "prepSeconds": 0,
+          "answerSeconds": 30,
+          "modelAnswer": ["She wants to take the bus, but it has just left."]
+        },
+        {
+          "no": 4,
+          "type": "opinion",
+          "prompt": "Some people say that it is better to live in a small town than in a big city. What do you think about that?",
+          "prepSeconds": 0,
+          "answerSeconds": 40,
+          "modelAnswer": [
+            "I agree. People in small towns often know their neighbors well. They can also enjoy a quiet life in nature.",
+            "I disagree. It is not easy to go shopping or see a doctor in small towns. There are also not many jobs there."
+          ]
+        },
+        {
+          "no": 5,
+          "type": "personal",
+          "prompt": "Today, many people take buses to get around their towns. Do you often take a bus?",
+          "prepSeconds": 0,
+          "answerSeconds": 40,
+          "modelAnswer": [
+            "Yes. (Please tell me more.) I take a bus to the station every day. It is convenient because the bus stop is near my house.",
+            "No. (Why not?) I usually ride a bicycle to school. It is cheaper and faster than taking a bus."
+          ]
         }
       ]
     }

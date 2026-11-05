@@ -17,6 +17,7 @@
 
 実行後、2級の1枚絵をコマに切り分け（split_panels.py）、data/<grade>/sets.json が参照している
 画像がすべて揃っているか検証し、問題選択画面の小さな画像（make_thumbs.py）を作る。
+下書き（"draft": true）の回は生徒に見えないので、画像がなくても誤りにはせず、そろったら知らせる。
 """
 
 from __future__ import annotations
@@ -56,22 +57,28 @@ def normalize_target(grade: str, value: str) -> str:
     return value if value.startswith(f"{grade}-") else f"{grade}-{value}"
 
 
-def verify(grade: str, out_dir: Path) -> list[str]:
-    """sets.json が参照する画像が実在するか確かめ、欠けているものを返す。"""
+def verify(grade: str) -> tuple[list[str], list[str], list[str]]:
+    """sets.json が参照する画像が実在するか確かめる。
+
+    返すのは (公開中の回で欠けている画像, 下書きの回で欠けている画像, 画像がそろった下書きの回)。
+    下書き（"draft": true）の回は生徒に見えないので、画像がなくても誤りにはしない。
+    """
     sets_path = ROOT / "data" / grade / "sets.json"
     if not sets_path.exists():
-        return []
+        return [], [], []
     data = json.loads(sets_path.read_text(encoding="utf-8"))
-    missing = []
+    missing, draft_missing, ready_drafts = [], [], []
     for s in data.get("sets", []):
-        for key in ("pictureA", "pictureB"):
-            rel = s.get(key)
-            if rel and not (ROOT / rel).exists():
-                missing.append(f"{s['setId']} {key}: {rel}")
-        for i, panel in enumerate((s.get("story") or {}).get("panels", []), start=1):
-            if not (ROOT / panel["image"]).exists():
-                missing.append(f"{s['setId']} コマ{i}: {panel['image']}")
-    return missing
+        refs = [(key, s.get(key)) for key in ("pictureA", "pictureB")]
+        refs += [(f"コマ{i}", p["image"]) for i, p in enumerate((s.get("story") or {}).get("panels", []), start=1)]
+        lacking = [f"{s['setId']} {label}: {rel}" for label, rel in refs if rel and not (ROOT / rel).exists()]
+        if not s.get("draft"):
+            missing += lacking
+        elif lacking:
+            draft_missing += lacking
+        else:
+            ready_drafts.append(s["setId"])
+    return missing, draft_missing, ready_drafts
 
 
 def main() -> int:
@@ -162,13 +169,20 @@ def main() -> int:
         thumbs = make_thumbs(args.grade)
         print(f"問題選択画面の小さな画像を {len(thumbs)} 枚作りました。")
 
-    missing = verify(args.grade, out_dir)
+    missing, draft_missing, ready_drafts = verify(args.grade)
+    if draft_missing:
+        print("\n下書きの回（生徒には見えない）で、まだない画像:")
+        for m in draft_missing:
+            print(f"  {m}")
+    if ready_drafts:
+        print(f"\n画像がそろった下書きの回: {', '.join(ready_drafts)}")
+        print('No.2・No.3 の解答例を画像と照合してから、sets.json の "draft": true を消すと生徒に見えるようになります。')
     if missing:
-        print("\n警告: sets.json が参照しているのに見つからない画像があります。")
+        print("\n警告: 公開中の回が参照しているのに見つからない画像があります。")
         for m in missing:
             print(f"  {m}")
         return 1
-    print("sets.json が参照する画像はすべて揃っています。")
+    print("\n公開中の回が参照する画像はすべて揃っています。")
     return 0
 
 

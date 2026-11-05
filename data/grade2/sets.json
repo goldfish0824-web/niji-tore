@@ -1,8 +1,8 @@
 {
   "grade": "grade2",
   "gradeLabel": "英検2級",
-  "version": "2026-10-18",
-  "status": "5回分の画像を取り込み済み。No.2 の解答例と speech.side は画像と照合済み",
+  "version": "2026-11-05",
+  "status": "第1〜5回は画像を取り込み済みで、No.2 の解答例と speech.side も画像と照合済み。第6〜10回は下書き（draft）で、画像待ち",
   "interviewerLines": {
     "start": "Let's start the test. Here's your card.",
     "silentReading": "First, please read the passage silently for 20 seconds.",
@@ -347,6 +347,316 @@
           "modelAnswer": [
             "Yes. (Why?) Many people want to relax in nature after working hard. Also, outdoor goods are becoming cheaper and easier to use.",
             "No. (Why not?) Many people are too busy to go to the mountains. Also, some people prefer to stay at home and play video games."
+          ]
+        }
+      ]
+    },
+    {
+      "setId": "grade2-06",
+      "draft": true,
+      "title": "Animal Shelters",
+      "passage": "Every year, many dogs and cats in Japan lose their homes. Animal shelters take care of these pets and look for new owners for them. Now, some shelters hold events where people can meet the animals. By doing so, they are able to find new families for more pets. However, owners need to be ready to take care of their pets for many years.",
+      "story": {
+        "firstSentence": "One day, Aya was talking with her parents about getting a dog.",
+        "panels": [
+          { "image": "images/grade2/grade2-06-1.jpg", "speech": { "text": "I promise I'll walk the dog every day.", "side": "left" } },
+          { "image": "images/grade2/grade2-06-2.jpg", "arrow": "That weekend" },
+          { "image": "images/grade2/grade2-06-3.jpg", "arrow": "A month later" }
+        ]
+      },
+      "reading": { "prepSeconds": 20, "answerSeconds": 60 },
+      "questions": [
+        {
+          "no": 1,
+          "type": "passage",
+          "prompt": "According to the passage, how are some animal shelters able to find new families for more pets?",
+          "prepSeconds": 0,
+          "answerSeconds": 30,
+          "modelAnswer": ["By holding events where people can meet the animals."]
+        },
+        {
+          "no": 2,
+          "type": "story",
+          "prompt": null,
+          "prepSeconds": 20,
+          "answerSeconds": 90,
+          "modelAnswer": [
+            "One day, Aya was talking with her parents about getting a dog.",
+            "She said to them, \"I promise I'll walk the dog every day.\"",
+            "That weekend, Aya was holding a puppy at an animal shelter.",
+            "She was looking forward to walking it in the park.",
+            "A month later, Aya's father was walking the dog in the rain.",
+            "He was thinking that Aya was still sleeping."
+          ]
+        },
+        {
+          "no": 3,
+          "type": "opinion",
+          "prompt": "Some people say that it is good for children to take care of pets. What do you think about that?",
+          "prepSeconds": 0,
+          "answerSeconds": 45,
+          "modelAnswer": [
+            "I agree. Taking care of pets teaches children to be responsible. They also learn that all living things are important.",
+            "I disagree. Taking care of pets is hard work for children. In many cases, their parents end up doing most of the work."
+          ]
+        },
+        {
+          "no": 4,
+          "type": "personal",
+          "prompt": "Today, there are many cafés where people can play with animals such as cats. Do you think the number of such cafés will increase in the future?",
+          "prepSeconds": 0,
+          "answerSeconds": 40,
+          "modelAnswer": [
+            "Yes. (Why?) Many people want to have pets but cannot keep them at home. At such cafés, they can relax with animals easily.",
+            "No. (Why not?) Some people worry that these cafés are stressful for the animals. Also, many people prefer to keep their own pets."
+          ]
+        }
+      ]
+    },
+    {
+      "setId": "grade2-07",
+      "draft": true,
+      "title": "Electric Cars",
+      "passage": "Electric cars are becoming more common in Japan. They do not produce harmful gases while they are running, so they are better for the environment than gasoline cars. Some local governments give money to people who buy such cars. By doing so, they are trying to increase the number of electric cars. However, there are still not enough places to charge them.",
+      "story": {
+        "firstSentence": "One day, the Sato family was going to the beach in their new electric car.",
+        "panels": [
+          { "image": "images/grade2/grade2-07-1.jpg", "speech": { "text": "The battery is full, so we can drive to the beach without stopping.", "side": "left" } },
+          { "image": "images/grade2/grade2-07-2.jpg", "arrow": "On the highway" },
+          { "image": "images/grade2/grade2-07-3.jpg", "arrow": "At a service area" }
+        ]
+      },
+      "reading": { "prepSeconds": 20, "answerSeconds": 60 },
+      "questions": [
+        {
+          "no": 1,
+          "type": "passage",
+          "prompt": "According to the passage, how are some local governments trying to increase the number of electric cars?",
+          "prepSeconds": 0,
+          "answerSeconds": 30,
+          "modelAnswer": ["By giving money to people who buy electric cars."]
+        },
+        {
+          "no": 2,
+          "type": "story",
+          "prompt": null,
+          "prepSeconds": 20,
+          "answerSeconds": 90,
+          "modelAnswer": [
+            "One day, the Sato family was going to the beach in their new electric car.",
+            "Mr. Sato said to his family, \"The battery is full, so we can drive to the beach without stopping.\"",
+            "On the highway, there was a traffic jam, and the battery was getting low.",
+            "Mrs. Sato was thinking of charging the car.",
+            "At a service area, many cars were waiting to use the charger.",
+            "Mr. Sato was looking at his watch, and Ken looked bored."
+          ]
+        },
+        {
+          "no": 3,
+          "type": "opinion",
+          "prompt": "Some people say that people should use public transportation instead of their own cars. What do you think about that?",
+          "prepSeconds": 0,
+          "answerSeconds": 45,
+          "modelAnswer": [
+            "I agree. Using public transportation is better for the environment. It can also reduce traffic jams in big cities.",
+            "I disagree. In the countryside, there are not many buses or trains. People there need their own cars in their daily lives."
+          ]
+        },
+        {
+          "no": 4,
+          "type": "personal",
+          "prompt": "Today, some companies are developing cars that can drive themselves. Do you think such cars will become common in the future?",
+          "prepSeconds": 0,
+          "answerSeconds": 40,
+          "modelAnswer": [
+            "Yes. (Why?) Technology is improving very quickly. Such cars will also help elderly people who cannot drive.",
+            "No. (Why not?) Many people are worried about accidents caused by such cars. It will take a long time to make them safe enough."
+          ]
+        }
+      ]
+    },
+    {
+      "setId": "grade2-08",
+      "draft": true,
+      "title": "Crowded Tourist Spots",
+      "passage": "The number of tourists visiting Japan has been increasing. Some famous places are now so crowded that local people have trouble taking buses to work or school. For this reason, some cities have started charging tourists special fees. By doing so, they hope to reduce crowds and keep their towns clean. Other cities are telling tourists about places that are less famous.",
+      "story": {
+        "firstSentence": "One day, Kenta and his parents were on a trip to a famous old town.",
+        "panels": [
+          { "image": "images/grade2/grade2-08-1.jpg", "speech": { "text": "Let's go to the temple early tomorrow morning before it gets crowded.", "side": "left" } },
+          { "image": "images/grade2/grade2-08-2.jpg", "arrow": "The next morning" },
+          { "image": "images/grade2/grade2-08-3.jpg", "arrow": "That afternoon" }
+        ]
+      },
+      "reading": { "prepSeconds": 20, "answerSeconds": 60 },
+      "questions": [
+        {
+          "no": 1,
+          "type": "passage",
+          "prompt": "According to the passage, how do some cities hope to reduce crowds and keep their towns clean?",
+          "prepSeconds": 0,
+          "answerSeconds": 30,
+          "modelAnswer": ["By charging tourists special fees."]
+        },
+        {
+          "no": 2,
+          "type": "story",
+          "prompt": null,
+          "prepSeconds": 20,
+          "answerSeconds": 90,
+          "modelAnswer": [
+            "One day, Kenta and his parents were on a trip to a famous old town.",
+            "Kenta said to his parents, \"Let's go to the temple early tomorrow morning before it gets crowded.\"",
+            "The next morning, there were no other people at the temple, and Kenta's mother was taking a picture.",
+            "Kenta's father was looking forward to eating Japanese sweets at a café.",
+            "That afternoon, the shopping street was very crowded.",
+            "There was a long line in front of the café, and Kenta's father was disappointed."
+          ]
+        },
+        {
+          "no": 3,
+          "type": "opinion",
+          "prompt": "Some people say that Japan should welcome more tourists from other countries. What do you think about that?",
+          "prepSeconds": 0,
+          "answerSeconds": 45,
+          "modelAnswer": [
+            "I agree. Tourists spend a lot of money at shops and hotels, so it is good for the economy. It is also a good chance for Japanese people to learn about other cultures.",
+            "I disagree. Too many tourists cause problems such as crowded trains and trash on the streets. Japan should solve these problems first."
+          ]
+        },
+        {
+          "no": 4,
+          "type": "personal",
+          "prompt": "Today, many young people want to study abroad. Do you think it is a good idea for high school students to study abroad?",
+          "prepSeconds": 0,
+          "answerSeconds": 40,
+          "modelAnswer": [
+            "Yes. (Why?) Students can improve their foreign language skills quickly. They can also learn to see things from different points of view.",
+            "No. (Why not?) Studying abroad costs a lot of money. High school students should learn more about their own country first."
+          ]
+        }
+      ]
+    },
+    {
+      "setId": "grade2-09",
+      "draft": true,
+      "title": "Staying Safe in the Heat",
+      "passage": "Summers in Japan have been getting hotter in recent years. Many people suffer from heatstroke, especially elderly people and small children. Now, some cities have opened cool rest areas in public places such as libraries and shopping malls. By doing so, they are trying to protect people from the heat. Experts also advise people to drink water often, even when they are not thirsty.",
+      "story": {
+        "firstSentence": "One summer day, Taro and his father were going to watch a baseball game.",
+        "panels": [
+          { "image": "images/grade2/grade2-09-1.jpg", "speech": { "text": "It's going to be very hot today. Don't forget to take these.", "side": "left" } },
+          { "image": "images/grade2/grade2-09-2.jpg", "arrow": "At the stadium" },
+          { "image": "images/grade2/grade2-09-3.jpg", "arrow": "During the game" }
+        ]
+      },
+      "reading": { "prepSeconds": 20, "answerSeconds": 60 },
+      "questions": [
+        {
+          "no": 1,
+          "type": "passage",
+          "prompt": "According to the passage, how are some cities trying to protect people from the heat?",
+          "prepSeconds": 0,
+          "answerSeconds": 30,
+          "modelAnswer": ["By opening cool rest areas in public places such as libraries and shopping malls."]
+        },
+        {
+          "no": 2,
+          "type": "story",
+          "prompt": null,
+          "prepSeconds": 20,
+          "answerSeconds": 90,
+          "modelAnswer": [
+            "One summer day, Taro and his father were going to watch a baseball game.",
+            "Taro's mother said to them, \"It's going to be very hot today. Don't forget to take these.\"",
+            "At the stadium, Taro was drinking water, but his father was sweating a lot.",
+            "Taro's father wanted something cold to drink.",
+            "During the game, Taro's father was not feeling well, so he was resting in a cool room.",
+            "A staff member was giving him some water, and Taro looked worried."
+          ]
+        },
+        {
+          "no": 3,
+          "type": "opinion",
+          "prompt": "Some people say that schools should have fewer outdoor activities in summer. What do you think about that?",
+          "prepSeconds": 0,
+          "answerSeconds": 45,
+          "modelAnswer": [
+            "I agree. It is dangerous for students to exercise outside on very hot days. Schools should move such activities to cooler seasons.",
+            "I disagree. Students can stay safe if they drink water often and take breaks. Outdoor activities are also important for their health."
+          ]
+        },
+        {
+          "no": 4,
+          "type": "personal",
+          "prompt": "Today, many people use air conditioners for many hours in summer. Do you think people should try to use less electricity?",
+          "prepSeconds": 0,
+          "answerSeconds": 40,
+          "modelAnswer": [
+            "Yes. (Why?) Producing electricity can cause pollution. People can save electricity by using fans or wearing cool clothes.",
+            "No. (Why not?) Summers are becoming dangerously hot. People should use air conditioners to protect their health."
+          ]
+        }
+      ]
+    },
+    {
+      "setId": "grade2-10",
+      "draft": true,
+      "title": "Learning at Any Age",
+      "passage": "Many people in Japan want to keep learning after they finish school. Some community centers offer cheap classes in subjects such as English, computers, and cooking. Local people can join these classes in the evenings or on weekends. By doing so, they can learn new skills and make new friends. Such classes are especially popular among people who have retired.",
+      "story": {
+        "firstSentence": "One day, Miki was talking with her grandfather about a computer class.",
+        "panels": [
+          { "image": "images/grade2/grade2-10-1.jpg", "speech": { "text": "Why don't you join the computer class at the community center?", "side": "left" } },
+          { "image": "images/grade2/grade2-10-2.jpg", "arrow": "A few weeks later" },
+          { "image": "images/grade2/grade2-10-3.jpg", "arrow": "A month later" }
+        ]
+      },
+      "reading": { "prepSeconds": 20, "answerSeconds": 60 },
+      "questions": [
+        {
+          "no": 1,
+          "type": "passage",
+          "prompt": "According to the passage, how can local people learn new skills and make new friends?",
+          "prepSeconds": 0,
+          "answerSeconds": 30,
+          "modelAnswer": ["By joining classes at community centers in the evenings or on weekends."]
+        },
+        {
+          "no": 2,
+          "type": "story",
+          "prompt": null,
+          "prepSeconds": 20,
+          "answerSeconds": 90,
+          "modelAnswer": [
+            "One day, Miki was talking with her grandfather about a computer class.",
+            "She said to him, \"Why don't you join the computer class at the community center?\"",
+            "A few weeks later, her grandfather was learning how to use a computer.",
+            "He was looking forward to talking with Miki on a video call.",
+            "A month later, Miki was studying for a test at night.",
+            "Her grandfather was calling her, so she looked troubled."
+          ]
+        },
+        {
+          "no": 3,
+          "type": "opinion",
+          "prompt": "Some people say that people should keep studying even after they start working. What do you think about that?",
+          "prepSeconds": 0,
+          "answerSeconds": 45,
+          "modelAnswer": [
+            "I agree. The world is changing quickly, so people need to learn new skills. Studying can also help them get better jobs.",
+            "I disagree. Many workers are already very busy with their jobs. They need time to rest and spend with their families."
+          ]
+        },
+        {
+          "no": 4,
+          "type": "personal",
+          "prompt": "Today, many people use smartphone apps to learn foreign languages. Do you think apps are a good way to learn a foreign language?",
+          "prepSeconds": 0,
+          "answerSeconds": 40,
+          "modelAnswer": [
+            "Yes. (Why?) People can study with apps anytime and anywhere. Many apps are also free or cheap.",
+            "No. (Why not?) It is difficult to practice speaking with apps. Talking with real people is a better way to learn."
           ]
         }
       ]
