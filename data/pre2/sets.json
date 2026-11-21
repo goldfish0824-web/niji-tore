@@ -1,7 +1,8 @@
 {
   "grade": "pre2",
   "gradeLabel": "英検準2級",
-  "version": "2026-11-05",
+  "version": "2026-11-21",
+  "status": "第1〜5回と第7〜10回は画像と照合済み。第6回はイラストB（服が小さすぎる）の描き直し待ちで下書き",
   "interviewerLines": {
     "start": "Let's start the test. Here's your card.",
     "silentReading":"First, please read the passage silently for 20 seconds.",
@@ -370,7 +371,7 @@
             "A boy is tying his shoes.",
             "A woman is carrying shopping bags."
           ],
-          "extraCheckPoints": ["trying on / putting on a hat はどちらも正解とする", "tying his shoes / tying his shoelaces はどちらも正解とする"]
+          "extraCheckPoints": ["looking in the mirror / holding a dress はどちらも正解とする", "trying on / putting on a hat はどちらも正解とする", "tying his shoes / tying his shoelaces はどちらも正解とする"]
         },
         {
           "no": 3,
@@ -407,7 +408,6 @@
     },
     {
       "setId": "pre2-07",
-      "draft": true,
       "title": "Exercise Machines in Parks",
       "passage": "Many people want to stay healthy, but going to a gym can be expensive. Now, some cities have put simple exercise machines in parks. Local people can use these machines for free. By doing so, they can exercise every day without spending money. Such parks are popular with elderly people.",
       "pictureA": "images/pre2/pre2-07-a.jpg",
@@ -472,7 +472,6 @@
     },
     {
       "setId": "pre2-08",
-      "draft": true,
       "title": "Paying with Smartphones",
       "passage": "In Japan, more and more people are paying without cash. At many shops, customers can pay just by holding their smartphones over a small machine. In this way, they can pay quickly without carrying coins. However, some people still feel safer using cash, especially elderly people.",
       "pictureA": "images/pre2/pre2-08-a.jpg",
@@ -537,7 +536,6 @@
     },
     {
       "setId": "pre2-09",
-      "draft": true,
       "title": "Delivery Boxes",
       "passage": "Online shopping has become popular, and delivery workers are busier than before. Now, many apartment buildings have delivery boxes near their entrances. Workers can leave packages in these boxes when people are not at home. By doing so, workers can save time. People can also get their packages anytime.",
       "pictureA": "images/pre2/pre2-09-a.jpg",
@@ -602,7 +600,6 @@
     },
     {
       "setId": "pre2-10",
-      "draft": true,
       "title": "Community Buses",
       "passage": "In some areas of Japan, there are not many trains or buses. This is a problem for elderly people who cannot drive. Now, some towns run small buses that stop near people's homes. In this way, elderly people can go shopping and visit hospitals easily. Such buses are becoming more common.",
       "pictureA": "images/pre2/pre2-10-a.jpg",

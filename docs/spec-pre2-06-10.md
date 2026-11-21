@@ -16,6 +16,20 @@
 
 公開前の回は、URL に `&draft=1` をつけると確認できる（例: `app/?grade=pre2&draft=1&set=pre2-06`）。
 
+## 取り込みの記録（2026-11-21）
+
+- 第7〜10回：画像を取り込み、No.2・No.3 の解答例が絵と合っていることを確かめて公開した
+- 第7回イラストA：左上の空に緑色のにじみがあったので、背景の色で塗りつぶした。元の画像は `images/pre2/_incoming/_archive/` にある
+- 第6回イラストB：上着が小さすぎることが絵から読み取りにくい（袖が七分丈に見え、吹き出しの中とも差がない）ので、描き直すまで下書きのままにしている
+
+第6回イラストBは、今の画像（`images/pre2/pre2-06-b.jpg`）を Gemini にアップロードして、これを貼る。
+
+```text
+Edit this image. Make the brown jacket that the man is wearing in the real scene (not in the thought bubble) obviously far too small for him: the sleeves end just below his elbows, the jacket is so short that it ends well above his belt, and the front is pulled tight and cannot be buttoned, with a wide gap showing his white shirt. In the thought bubble, show the same man wearing the same brown jacket in a bigger size that fits him perfectly, with the sleeves reaching his wrists and the front neatly buttoned. Keep everything else the same. Do not add any text.
+```
+
+できた画像を `images/pre2/_incoming/` に置き、mapping.json に `"06-b"` と書いて rename_images.py を実行すれば差し替わる。
+
 ## イラストBの型
 
 第1〜5回（両手がふさがっている／道具が壊れている／禁止マーク／高くて届かない／行列が長い）と重ならないようにした。

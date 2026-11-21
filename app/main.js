@@ -161,10 +161,15 @@ function selectSet(set) {
 // 回ごとのカードの色（虹の順）
 const SET_COLORS = ["#f0447a", "#f57c1f", "#23a565", "#2f80ed", "#7b5cf0"];
 
+/** 第何回か。並び順ではなく setId の番号から決める（下書きの回を飛ばしても番号がずれないように）。 */
+function setNo(s) {
+  return Number(s.setId.split("-").pop());
+}
+
 function renderSetList() {
   const done = doneSets();
   $("#set-list").replaceChildren(
-    ...state.data.sets.map((s, i) =>
+    ...state.data.sets.map((s) =>
       h(
         "button",
         {
@@ -172,7 +177,7 @@ function renderSetList() {
           class: "set-item",
           role: "radio",
           "aria-checked": String(s === state.set),
-          style: `--c: ${SET_COLORS[i % SET_COLORS.length]}`,
+          style: `--c: ${SET_COLORS[(setNo(s) - 1) % SET_COLORS.length]}`,
           onclick: () => selectSet(s),
         },
         // 小さな画像は scripts/make_thumbs.py が作る。なければ出さない
@@ -180,7 +185,7 @@ function renderSetList() {
         h(
           "span",
           { class: "set-text" },
-          h("span", { class: "set-no" }, `第${i + 1}回`),
+          h("span", { class: "set-no" }, `第${setNo(s)}回`),
           h("span", { class: "set-name", lang: "en" }, s.title),
           done.includes(s.setId) && h("span", { class: "set-done" }, "✓ 練習済み")
         ),
@@ -225,8 +230,7 @@ function markDone(setId) {
  * 読み込み直さずに進むので、終えた回数と講評をもらった回数はここで級・回ごとに数える。
  */
 function countEvent(kind) {
-  const no = state.data.sets.indexOf(state.set) + 1;
-  window.goatcounter?.count?.({ path: `${kind}/${state.data.gradeLabel}/第${no}回`, title: state.set.title, event: true });
+  window.goatcounter?.count?.({ path: `${kind}/${state.data.gradeLabel}/第${setNo(state.set)}回`, title: state.set.title, event: true });
 }
 
 // ---------------------------------------------------------------------------
