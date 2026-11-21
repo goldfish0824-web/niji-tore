@@ -10,7 +10,7 @@
 
 - 準2級：問題10回分（パッセージ・イラスト・質問・解答例）が完成（第6〜10回は `docs/spec-pre2-06-10.md`）
 - 2級：問題10回分と3コマ画像が完成し、アプリで練習できる（`docs/spec-grade2.md`、第6〜10回は `docs/spec-grade2-06-10.md`）
-- 3級：問題5回分とイラストが完成し、アプリで練習できる（`docs/spec-grade3.md`）
+- 3級：問題5回分とイラストが完成し、アプリで練習できる（`docs/spec-grade3.md`）。第6〜10回は下書きで、画像待ち（`docs/spec-grade3-06-10.md`）
 - アプリ本体：トップページで級を選び、各級の回（準2級・2級は第1〜10回、3級は第1〜5回）を黙読 → 音読 → 質問 → 講評表示まで通せる。iPhone で確認済み
 - Cloudflare Worker：配置済み（手順は `worker/README.md`）
 
@@ -33,6 +33,7 @@ python -m http.server 8000
 | `docs/spec-grade2.md` | 2級の仕様書。3コマ漫画の生成プロンプト |
 | `docs/spec-grade2-06-10.md` | 2級の第6〜10回。生成プロンプトは共通ヘッダー込み |
 | `docs/spec-grade3.md` | 3級の仕様書。イラストの生成プロンプト |
+| `docs/spec-grade3-06-10.md` | 3級の第6〜10回。生成プロンプトは共通ヘッダー込み |
 | `data/pre2/sets.json` | 準2級の問題データ |
 | `data/grade2/sets.json` | 2級の問題データ |
 | `data/grade3/sets.json` | 3級の問題データ |
