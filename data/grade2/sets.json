@@ -1,8 +1,8 @@
 {
   "grade": "grade2",
   "gradeLabel": "英検2級",
-  "version": "2026-11-05",
-  "status": "第1〜5回は画像を取り込み済みで、No.2 の解答例と speech.side も画像と照合済み。第6〜10回は下書き（draft）で、画像待ち",
+  "version": "2026-11-21",
+  "status": "10回分の画像を取り込み済み。No.2 の解答例と speech.side は画像と照合済み",
   "interviewerLines": {
     "start": "Let's start the test. Here's your card.",
     "silentReading": "First, please read the passage silently for 20 seconds.",
@@ -353,7 +353,6 @@
     },
     {
       "setId": "grade2-06",
-      "draft": true,
       "title": "Animal Shelters",
       "passage": "Every year, many dogs and cats in Japan lose their homes. Animal shelters take care of these pets and look for new owners for them. Now, some shelters hold events where people can meet the animals. By doing so, they are able to find new families for more pets. However, owners need to be ready to take care of their pets for many years.",
       "story": {
@@ -415,7 +414,6 @@
     },
     {
       "setId": "grade2-07",
-      "draft": true,
       "title": "Electric Cars",
       "passage": "Electric cars are becoming more common in Japan. They do not produce harmful gases while they are running, so they are better for the environment than gasoline cars. Some local governments give money to people who buy such cars. By doing so, they are trying to increase the number of electric cars. However, there are still not enough places to charge them.",
       "story": {
@@ -446,7 +444,7 @@
             "One day, the Sato family was going to the beach in their new electric car.",
             "Mr. Sato said to his family, \"The battery is full, so we can drive to the beach without stopping.\"",
             "On the highway, there was a traffic jam, and the battery was getting low.",
-            "Mrs. Sato was thinking of charging the car.",
+            "Mr. Sato was thinking of charging the car.",
             "At a service area, many cars were waiting to use the charger.",
             "Mr. Sato was looking at his watch, and Ken looked bored."
           ]
@@ -477,7 +475,6 @@
     },
     {
       "setId": "grade2-08",
-      "draft": true,
       "title": "Crowded Tourist Spots",
       "passage": "The number of tourists visiting Japan has been increasing. Some famous places are now so crowded that local people have trouble taking buses to work or school. For this reason, some cities have started charging tourists special fees. By doing so, they hope to reduce crowds and keep their towns clean. Other cities are telling tourists about places that are less famous.",
       "story": {
@@ -509,8 +506,8 @@
             "Kenta said to his parents, \"Let's go to the temple early tomorrow morning before it gets crowded.\"",
             "The next morning, there were no other people at the temple, and Kenta's mother was taking a picture.",
             "Kenta's father was looking forward to eating Japanese sweets at a café.",
-            "That afternoon, the shopping street was very crowded.",
-            "There was a long line in front of the café, and Kenta's father was disappointed."
+            "That afternoon, the shopping street was very crowded with tourists.",
+            "Kenta and his parents looked tired and disappointed."
           ]
         },
         {
@@ -539,7 +536,6 @@
     },
     {
       "setId": "grade2-09",
-      "draft": true,
       "title": "Staying Safe in the Heat",
       "passage": "Summers in Japan have been getting hotter in recent years. Many people suffer from heatstroke, especially elderly people and small children. Now, some cities have opened cool rest areas in public places such as libraries and shopping malls. By doing so, they are trying to protect people from the heat. Experts also advise people to drink water often, even when they are not thirsty.",
       "story": {
@@ -601,7 +597,6 @@
     },
     {
       "setId": "grade2-10",
-      "draft": true,
       "title": "Learning at Any Age",
       "passage": "Many people in Japan want to keep learning after they finish school. Some community centers offer cheap classes in subjects such as English, computers, and cooking. Local people can join these classes in the evenings or on weekends. By doing so, they can learn new skills and make new friends. Such classes are especially popular among people who have retired.",
       "story": {

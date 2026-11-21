@@ -2,7 +2,7 @@
   "grade": "pre2",
   "gradeLabel": "英検準2級",
   "version": "2026-11-21",
-  "status": "第1〜5回と第7〜10回は画像と照合済み。第6回はイラストB（服が小さすぎる）の描き直し待ちで下書き",
+  "status": "10回分の画像を取り込み済み。No.2・No.3 の解答例は画像と照合済み",
   "interviewerLines": {
     "start": "Let's start the test. Here's your card.",
     "silentReading":"First, please read the passage silently for 20 seconds.",
@@ -343,7 +343,6 @@
     },
     {
       "setId": "pre2-06",
-      "draft": true,
       "title": "Secondhand Clothes",
       "passage": "Many young people like fashion, but new clothes are often expensive. These days, some stores buy used clothes and sell them at low prices. Many students shop at such stores. In this way, they can enjoy fashion without spending much money. These stores are also good for the environment.",
       "pictureA": "images/pre2/pre2-06-a.jpg",

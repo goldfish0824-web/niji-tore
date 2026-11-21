@@ -18,6 +18,12 @@
 
 第7回の1コマ目は屋外なので、上4分の1は壁ではなく空を空けておく指示にしてある。
 
+## 取り込みの記録（2026-11-21）
+
+- 5回分とも Gemini アプリで 16:9 を選んで生成した（アプリの縦横比に 21:9 がなくなったため）。第7回は 16:9 の中に横長の帯として描かれ、スクリプトが上下の余白を落としたので、コマは第1〜5回と同じ形になった。ほかの4回は画面いっぱいに描かれ、コマが少し縦長になった
+- 画像を見て解答例を2か所直した。第7回2コマ目の吹き出しは運転している父から出ていたので、充電を考えているのを父にした。第8回3コマ目はカフェの前の行列がはっきりしないので、通りの混雑と3人の様子を述べる文にした
+- 5回とも、せりふを言う人は1コマ目の左にいる（`speech.side` は `left` のまま）
+
 ---
 
 ## Set 6 — Animal Shelters
@@ -93,7 +99,7 @@ Electric cars are becoming more common in Japan. They do not produce harmful gas
 | コマ | 矢印の語句 | 内容 |
 | --- | --- | --- |
 | 1 | — | 家の前で充電中の車。父が自慢げに指さす。せりふ "The battery is full, so we can drive to the beach without stopping." |
-| 2 | On the highway | 渋滞で電池の表示が残りわずか。父は心配し、母は充電することを考える |
+| 2 | On the highway | 渋滞で電池の表示が残りわずか。父が充電することを考える |
 | 3 | At a service area | 充電器の前に車が並んでいる。父は腕時計を見て、ケンは退屈している |
 
 **3コマ漫画 生成プロンプト**（共通ヘッダー込み）
@@ -112,7 +118,7 @@ Panel 3 (a charging station at a highway service area, daytime): four electric c
 - One day, the Sato family was going to the beach in their new electric car.
 - Mr. Sato said to his family, "The battery is full, so we can drive to the beach without stopping."
 - On the highway, there was a traffic jam, and the battery was getting low.
-- Mrs. Sato was thinking of charging the car.
+- Mr. Sato was thinking of charging the car.
 - At a service area, many cars were waiting to use the charger.
 - Mr. Sato was looking at his watch, and Ken looked bored.
 
@@ -148,7 +154,7 @@ The number of tourists visiting Japan has been increasing. Some famous places ar
 | --- | --- | --- |
 | 1 | — | 旅館の部屋でケンタがタブレットの寺の写真を見せる。せりふ "Let's go to the temple early tomorrow morning before it gets crowded." |
 | 2 | The next morning | 朝の寺はすいている。母が写真を撮る。父はカフェで和菓子を食べるところを思い浮かべる |
-| 3 | That afternoon | 午後の商店街は大混雑。カフェの前に長い行列ができていて、父はがっかりしている |
+| 3 | That afternoon | 午後の商店街は観光客で大混雑。3人とも疲れて、がっかりしている |
 
 **3コマ漫画 生成プロンプト**（共通ヘッダー込み）
 
@@ -167,8 +173,8 @@ Panel 3 (a narrow shopping street in the afternoon, very crowded, with many tour
 - Kenta said to his parents, "Let's go to the temple early tomorrow morning before it gets crowded."
 - The next morning, there were no other people at the temple, and Kenta's mother was taking a picture.
 - Kenta's father was looking forward to eating Japanese sweets at a café.
-- That afternoon, the shopping street was very crowded.
-- There was a long line in front of the café, and Kenta's father was disappointed.
+- That afternoon, the shopping street was very crowded with tourists.
+- Kenta and his parents looked tired and disappointed.
 
 **No.3** — Some people say that Japan should welcome more tourists from other countries. What do you think about that?
 
