@@ -16,6 +16,11 @@
 
 公開前の回は、URL に `&draft=1` をつけると確認できる（例: `app/?grade=grade3&draft=1&set=grade3-06`）。
 
+## 取り込みの記録（2026-11-21）
+
+- 5回分の画像を取り込み、数（雪だるま2つ・折り鶴4羽・鳥1羽）と位置（鳥は枝の上、帽子は座席の上）が指定どおりなのを確かめて公開した
+- 第7回 No.3 は、男の子のすくい網にもう金魚が乗っていて、吹き出しは金魚の袋を持っている絵だったので、解答例を get a goldfish にした（catch / take ... home も正解とする）
+
 ## No.2・No.3 の聞き方
 
 第1〜5回と同じく、No.2 は How many / Where / What is ... doing、No.3 は What is ... doing / What is ... going to do をばらして使った。
@@ -89,7 +94,7 @@ Scene: a summer festival at night by a river, with a dark blue sky and colorful 
 
 **No.2** — Please look at the picture. What is the woman doing? — 解答例: She's taking a picture of the fireworks.（画像を見て直す）
 
-**No.3** — Please look at the boy. What is he going to do? — 解答例: He's going to catch a goldfish.（画像を見て直す）
+**No.3** — Please look at the boy. What is he going to do? — 解答例: He's going to get a goldfish.（すくい網にもう金魚が乗っている絵になったので catch から直した）
 
 **No.4** — What kind of food do you like? — 解答例: I like curry and rice.
 

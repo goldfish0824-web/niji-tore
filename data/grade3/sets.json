@@ -3,7 +3,7 @@
   "gradeLabel": "英検3級",
   "shortAnswerMs": 50,
   "version": "2026-11-21",
-  "status": "第1〜5回は画像を取り込み済みで、No.2・No.3 の解答例も画像と照合済み。第6〜10回は下書き（draft）で、画像待ち",
+  "status": "10回分の画像を取り込み済み。No.2・No.3 の解答例は画像と照合済み",
   "interviewerLines": {
     "start": "Let's start the test. Here's your card.",
     "silentReading": "First, please read the passage silently for 20 seconds.",
@@ -318,7 +318,6 @@
     },
     {
       "setId": "grade3-06",
-      "draft": true,
       "title": "Cherry Blossoms",
       "passage": "In spring, many people in Japan enjoy looking at cherry blossoms. They often have picnics under the trees with their families. Cherry blossoms are very beautiful, so many tourists visit Japan in spring.",
       "pictureA": "images/grade3/grade3-06.jpg",
@@ -374,7 +373,6 @@
     },
     {
       "setId": "grade3-07",
-      "draft": true,
       "title": "Fireworks Festivals",
       "passage": "In Japan, fireworks festivals are popular in summer. Many people wear yukata and go to see the fireworks. There are also many food stands, so people can enjoy different kinds of food.",
       "pictureA": "images/grade3/grade3-07.jpg",
@@ -403,8 +401,8 @@
           "prompt": "Please look at the boy. What is he going to do?",
           "prepSeconds": 0,
           "answerSeconds": 20,
-          "modelAnswer": ["He's going to catch a goldfish."],
-          "extraCheckPoints": ["be going to ＋ 動詞の原形で答えているか", "catch a goldfish / get a goldfish はどちらも正解とする"]
+          "modelAnswer": ["He's going to get a goldfish."],
+          "extraCheckPoints": ["be going to ＋ 動詞の原形で答えているか", "get a goldfish / catch a goldfish / take a goldfish home はどれも正解とする（すくい網にはもう金魚が乗っていて、吹き出しは金魚の袋を持っている絵）"]
         },
         {
           "no": 4,
@@ -430,7 +428,6 @@
     },
     {
       "setId": "grade3-08",
-      "draft": true,
       "title": "Skiing",
       "passage": "Skiing is a popular winter sport. Many people go to snowy mountains on weekends. Some ski areas have lessons for beginners, so people can learn how to ski easily.",
       "pictureA": "images/grade3/grade3-08.jpg",
@@ -486,7 +483,6 @@
     },
     {
       "setId": "grade3-09",
-      "draft": true,
       "title": "Origami",
       "passage": "Origami is a traditional Japanese art. People can make birds, flowers, and many other things with just one sheet of paper. It is easy and fun, so it is popular with children.",
       "pictureA": "images/grade3/grade3-09.jpg",
@@ -542,7 +538,6 @@
     },
     {
       "setId": "grade3-10",
-      "draft": true,
       "title": "Train Trips",
       "passage": "Traveling by train is fun. People can enjoy beautiful views from the train window. Many stations sell special lunch boxes, so people can enjoy local food on the train.",
       "pictureA": "images/grade3/grade3-10.jpg",
